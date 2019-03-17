@@ -1,5 +1,6 @@
 ﻿using LetsLearn.Data;
-
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace LetsLearn.Repos
 {
@@ -7,6 +8,9 @@ namespace LetsLearn.Repos
     {
         public UserRepository(ManagementContext userContext) : base(userContext)
         {
+           
         }
+
+       
     }
 }

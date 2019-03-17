@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using LetsLearn.Data;
 using LetsLearn.Models;
@@ -19,6 +20,7 @@ namespace LetsLearn.Controllers
         {
             _userRepository = userRepository;
         }
+
 
         [HttpGet]
         public IActionResult Register()
@@ -50,12 +52,61 @@ namespace LetsLearn.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = new User
-                    (model.FirstName, model.LastName, model.EmailAddress, ComputeSha256Hash(model.Password), model.EmailAddress);
+                bool ok = false;
+                List<User> users = (List<User>)await _userRepository.GetAll<User>();
+                foreach (var i in users)
+                {
+                    if (i.UserName == model.UserName)
+                    {
+                        ok = true;
+                        return View();
+                    }
+                }
 
-                _userRepository.Create<User>(user);
-                _userRepository.Save();
-                return RedirectToAction("Index", "Home");
+                if (ok == false)
+                {
+                    User user = new User
+                    (model.FirstName, model.LastName, model.UserName, ComputeSha256Hash(model.Password),
+                        model.EmailAddress);
+
+                    _userRepository.Create<User>(user);
+                    _userRepository.Save();
+                    return RedirectToAction("Index", "Home");
+                }
+
+            }
+
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult LogIn()
+        {
+            return View();
+
+        }
+
+       
+
+        [HttpPost]
+        public async Task<IActionResult> LogIn (LogInModel model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                List<User> users = (List<User>) await _userRepository.GetAll<User>();
+                foreach (var i in users)
+                {
+                    if (i.UserName == model.UserName)
+                    {
+                        string pass = ComputeSha256Hash(model.Password);
+
+                        if (i.Password == pass)
+                            return RedirectToAction("Index", "Home");
+                    }
+
+                }
+           
 
             }
 

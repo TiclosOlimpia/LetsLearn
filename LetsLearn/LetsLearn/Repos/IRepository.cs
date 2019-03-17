@@ -19,8 +19,11 @@ namespace LetsLearn.Repos
         Task<ICollection<T>> GetAll<T>()
             where T : BaseEntity;
 
-        Task<T> GetById<T>(Guid Id)
+        Task<T> GetById<T> (string Id)
             where T : BaseEntity;
+
+        Task<T> GetByUserName<T>(string UserName)
+            where T : User;
 
         void Save();
     }

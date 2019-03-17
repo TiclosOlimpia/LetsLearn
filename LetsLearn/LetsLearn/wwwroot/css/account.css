@@ -1,0 +1,108 @@
+﻿.body-content
+{
+    margin: 0;
+    padding: 0;
+    display: block;
+    position: absolute;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+.form-title{
+    display: block;
+    background-color: #0d633f;
+    color: white;
+    font-size: 200%;
+    margin-top: 0;
+    padding: 10px;
+}
+
+input[type=text], input[type=password] {
+    width: 50%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #9fd8bd;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+    background-color: rgb(177, 230, 186);
+    outline: none;
+}
+
+label
+{
+    display: block;
+    width: 30%;
+}
+
+
+.form-group{
+    display: block;
+}
+.group{
+    display: flex;
+    justify-content: space-between;
+    margin:10px;
+}
+.signupbtn {
+    width: 20%;
+    height: 30px;
+    background:linear-gradient(to bottom, #11d69e 5%, #033d1f 100%);
+    background-color:#0d633f;
+}
+
+.alternative{
+    
+    color: darkblue;
+    font-weight: bold;
+
+}
+
+.alternative:hover {
+    text-decoration: none;
+    color: #033d1f;
+}
+
+
+
+
+.content{
+    background-color: #f1f1f1;
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    margin-bottom: 100px;
+    height: 30%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%; 
+    height: 200%;
+    border: 1px solid #888;
+    
+}
+
+.container{
+    max-width: 100%;
+}
+
+
+hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+}
+
+footer{
+    background-color: white;
+}
+
+#Register .form-group{
+    display: flex;
+    justify-content:inherit;
+    margin-left: 10px;
+    margin-right: 10px;
+}

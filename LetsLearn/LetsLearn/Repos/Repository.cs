@@ -40,14 +40,16 @@ namespace LetsLearn.Repos
             return await _context.Set<T>().SingleOrDefaultAsync(p => p.Id == Id);
         }
 
+        public async Task<T> GetByUserName<T>(string UserName) where T : User
+        {
+            return await _context.Set<T>().SingleOrDefaultAsync(p => p.UserName == UserName);
+        }
+
         public void Save()
         {
             _context.SaveChanges();
         }
 
-        public Task<T> GetById<T>(Guid Id) where T : BaseEntity
-        {
-            throw new NotImplementedException();
-        }
+      
     }
 }

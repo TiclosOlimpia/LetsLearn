@@ -31,3 +31,4 @@ C:\Scoala\Licenta\LetsLearn\LetsLearn\LetsLearn\obj\Debug\netcoreapp2.2\LetsLear
 C:\Scoala\Licenta\LetsLearn\LetsLearn\LetsLearn\obj\Debug\netcoreapp2.2\LetsLearn.dll
 C:\Scoala\Licenta\LetsLearn\LetsLearn\LetsLearn\obj\Debug\netcoreapp2.2\LetsLearn.pdb
 C:\Scoala\Licenta\LetsLearn\LetsLearn\LetsLearn\obj\Debug\netcoreapp2.2\LetsLearn.csproj.CopyComplete
+C:\Scoala\Licenta\LetsLearn\LetsLearn\LetsLearn\obj\Debug\netcoreapp2.2\Razor\Views\Account\LogIn.g.cshtml.cs
