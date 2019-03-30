@@ -12,7 +12,7 @@ namespace LetsLearn.Data
 
         }
 
-        public User(string firstName, string lastName, string userName, string password, string emailAddress)
+        public User(string firstName, string lastName, string userName, string password, string emailAddress, bool isTeacher)
         {
             Id = Guid.NewGuid().ToString();
             //Guard.ArgumentNotNullOrEmpty(firstName, nameof(firstName));
@@ -25,7 +25,8 @@ namespace LetsLearn.Data
             UserName = userName;
             Password = password;
             EmailAddress = emailAddress;
-           
+            IsTeacher = isTeacher;
+
             //Type = type;
         }
 
@@ -50,6 +51,8 @@ namespace LetsLearn.Data
         public string EmailAddress { get; set; }
         public object Guard { get; }
 
+        [Required]
+        public bool IsTeacher { get; set; }
 
         //[Required]
         //[StringLength(8, MinimumLength = 6)]
@@ -64,6 +67,8 @@ namespace LetsLearn.Data
 
 
         }
+
+        public IEnumerable<User_homework> User_homework { get; set; }
 
         //public ICollection<Homework> Homeworks { get; set; }
 

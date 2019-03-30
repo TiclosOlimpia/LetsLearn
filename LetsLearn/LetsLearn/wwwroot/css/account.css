@@ -1,4 +1,5 @@
-﻿.body-content
+﻿@import url('account.css');
+.body-content
 {
     margin: 0;
     padding: 0;
@@ -76,7 +77,6 @@ label
     left: 0;
     top: 0;
     margin-bottom: 100px;
-    height: 30%;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -105,4 +105,10 @@ footer{
     justify-content:inherit;
     margin-left: 10px;
     margin-right: 10px;
+}
+
+@media screen and (max-width: 850px){
+    .content{
+        width: 80%;
+    }
 }

@@ -40,7 +40,7 @@ namespace LetsLearn.Data
         public DateTime DateEnd { get; set; }
 
 
-
+        public IEnumerable<User_homework> User_homework { get; set; }
         //public ICollection<Grade> Grades { get; private set; }
 
         //[ForeignKey("Student")]

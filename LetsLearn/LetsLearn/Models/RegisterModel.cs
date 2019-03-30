@@ -33,7 +33,11 @@ namespace LetsLearn.Models
         [Required]
         [StringLength(60, MinimumLength = 5)]
         public string EmailAddress { get; set; }
-       
+
+        
+        public bool IsTeacher { get; set; }
+        public bool IsStudent { get; set; }
+
 
     }
 }

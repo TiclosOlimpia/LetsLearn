@@ -9,6 +9,9 @@ using LetsLearn.Repos;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography;
 using System.Text;
+using System.Web;
+using Microsoft.AspNetCore.Http;
+using System.Net;
 
 namespace LetsLearn.Controllers
 {
@@ -30,14 +33,10 @@ namespace LetsLearn.Controllers
         }
 
         static string ComputeSha256Hash(string rawData)
-        {
-            // Create a SHA256   
+        { 
             using (SHA256 sha256Hash = SHA256.Create())
             {
-                // ComputeHash - returns byte array  
                 byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
-
-                // Convert byte array to a string   
                 StringBuilder builder = new StringBuilder();
                 for (int i = 0; i < bytes.Length; i++)
                 {
@@ -65,13 +64,22 @@ namespace LetsLearn.Controllers
 
                 if (ok == false)
                 {
+                  
                     User user = new User
                     (model.FirstName, model.LastName, model.UserName, ComputeSha256Hash(model.Password),
-                        model.EmailAddress);
+                        model.EmailAddress, model.IsTeacher);
 
                     _userRepository.Create<User>(user);
                     _userRepository.Save();
-                    return RedirectToAction("Index", "Home");
+                    if (model.IsTeacher)
+                    {
+                        return RedirectToAction("Teacher", "Users");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Student", "Users");
+                    }
+                    
                 }
 
             }
@@ -91,8 +99,10 @@ namespace LetsLearn.Controllers
         [HttpPost]
         public async Task<IActionResult> LogIn (LogInModel model)
         {
+
             if (ModelState.IsValid)
             {
+
 
                 List<User> users = (List<User>) await _userRepository.GetAll<User>();
                 foreach (var i in users)
@@ -101,16 +111,54 @@ namespace LetsLearn.Controllers
                     {
                         string pass = ComputeSha256Hash(model.Password);
 
+
                         if (i.Password == pass)
-                            return RedirectToAction("Index", "Home");
+                        {
+                            CookieOptions cookieOptions = new CookieOptions();
+                            
+                            cookieOptions.IsEssential = true;
+                            if (model.Remember)
+                            {
+                                cookieOptions.Expires = DateTimeOffset.Now.AddDays(2);
+                                Response.Cookies.Append("userName", i.UserName,cookieOptions);
+                                Response.Cookies.Append("pasword", pass, cookieOptions);
+                                Response.Cookies.Append("Id", i.Id, cookieOptions);
+                                
+                            }
+                            else
+                            {
+                                
+                                Response.Cookies.Append("userName", model.UserName,cookieOptions);
+                                Response.Cookies.Append("pasword", pass, cookieOptions);
+                                Response.Cookies.Append("Id", i.Id,cookieOptions);
+                            }
+
+                            if (i.IsTeacher)
+                            {
+                                return RedirectToAction("Teacher", "Users");
+                            }
+                            else
+                            {
+                                return RedirectToAction("Student", "Users");
+                            }
+                            
+                        }
                     }
 
                 }
            
 
             }
+            
 
             return View();
+        }
+
+        public IActionResult ReadCookie()
+        {
+            ViewBag.value = Request.Cookies["userName"].ToString();
+            return View();
+
         }
     }
 }

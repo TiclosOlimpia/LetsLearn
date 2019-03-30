@@ -66,6 +66,8 @@ namespace LetsLearn.Migrations
                         .IsRequired()
                         .HasMaxLength(50);
 
+                    b.Property<bool>("IsTeacher");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(50);
@@ -81,6 +83,35 @@ namespace LetsLearn.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("LetsLearn.Data.User_homework", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("homeworkId");
+
+                    b.Property<string>("userId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("homeworkId");
+
+                    b.HasIndex("userId");
+
+                    b.ToTable("User_homework");
+                });
+
+            modelBuilder.Entity("LetsLearn.Data.User_homework", b =>
+                {
+                    b.HasOne("LetsLearn.Data.Homework", "homework")
+                        .WithMany("User_homework")
+                        .HasForeignKey("homeworkId");
+
+                    b.HasOne("LetsLearn.Data.User", "user")
+                        .WithMany("User_homework")
+                        .HasForeignKey("userId");
                 });
 #pragma warning restore 612, 618
         }

@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -37,8 +36,6 @@ namespace LetsLearn
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
-            
 
             services.AddScoped<IRepository, Repository>().AddEntityFrameworkSqlServer();
             services.AddDbContext<ManagementContext>(options => options.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=Licenta;Trusted_Connection=True;"));

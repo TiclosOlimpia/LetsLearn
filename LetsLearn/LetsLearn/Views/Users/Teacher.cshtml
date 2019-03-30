@@ -1,0 +1,29 @@
+﻿@model TeacherModel
+@{
+    ViewData["Title"] = "Teacher";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Teachert</title>
+
+</head>
+<body>
+    <h1>Bine ati venit, @ViewBag.teacher</h1>
+<form method="post" asp-controller="Users" asp-action="Choose_class">
+    <input type="submit" value="clasa I A" asp-for="clasa"/>
+    <input type="submit" value="clasa I B" asp-for="clasa"/>
+    <input type="submit" value="clasa a II-a A" asp-for="clasa"/>
+    <input type="submit" value="clasa a II-a B" asp-for="clasa"/>
+    <input type="submit" value="clasa a III-a A" asp-for="clasa"/>
+    <input type="submit" value="clasa a III-a B" asp-for="clasa"/>
+    <input type="submit" value="clasa a IV-a A" asp-for="clasa"/>
+    <input type="submit" value="clasa a IV-a B" asp-for="clasa"/>
+    
+  
+</form>
+
+</body>
+</html>

@@ -16,7 +16,7 @@ namespace LetsLearn.Models
         [StringLength(20, MinimumLength = 5)]
         [DataType(DataType.Password)]
         public string Password { get; set; }
-        public bool IsValid { get; internal set; }
+        public bool Remember { get; set; }
 
         //[Required]
         //public bool RememberMe { get; set; }

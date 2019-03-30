@@ -2,15 +2,6 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.2": {
-      "EntityFramework.SqlServerCompact/6.2.0": {
-        "type": "package",
-        "compile": {
-          "lib/net45/EntityFramework.SqlServerCompact.dll": {}
-        },
-        "runtime": {
-          "lib/net45/EntityFramework.SqlServerCompact.dll": {}
-        }
-      },
       "Microsoft.AspNet.WebApi.Client/5.2.6": {
         "type": "package",
         "dependencies": {
@@ -4451,23 +4442,6 @@
     }
   },
   "libraries": {
-    "EntityFramework.SqlServerCompact/6.2.0": {
-      "sha512": "wa1ILjn73fU1W1DVC/KeJMrVqfzJ4nQeXqZgRRwxpyKgqusAfc576Mj09tUOn3dmuWiju15BqiSxNuJGJnKmLQ==",
-      "type": "package",
-      "path": "entityframework.sqlservercompact/6.2.0",
-      "files": [
-        ".signature.p7s",
-        "content/net40/App.config.transform",
-        "content/net40/Web.config.transform",
-        "entityframework.sqlservercompact.6.2.0.nupkg.sha512",
-        "entityframework.sqlservercompact.nuspec",
-        "lib/net40/EntityFramework.SqlServerCompact.dll",
-        "lib/net40/EntityFramework.SqlServerCompact.xml",
-        "lib/net45/EntityFramework.SqlServerCompact.dll",
-        "lib/net45/EntityFramework.SqlServerCompact.xml",
-        "tools/install.ps1"
-      ]
-    },
     "Microsoft.AspNet.WebApi.Client/5.2.6": {
       "sha512": "91JMnE9zdIDphG00qgRvl8ZwKEjqAbNlJdfXUoMiIWPfpYyH7fyCsTSj6/aynRdw/Qr/K70xC7QC6MOJ1vFBJQ==",
       "type": "package",
@@ -12151,9 +12125,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.2": [
-      "EntityFramework.SqlServerCompact >= 6.2.0",
       "Microsoft.AspNetCore.App >= 2.2.0",
-      "Microsoft.AspNetCore.Cryptography.KeyDerivation >= 2.2.0",
       "Microsoft.AspNetCore.Razor.Design >= 2.2.0",
       "Microsoft.NETCore.App >= 2.2.0"
     ]
@@ -12199,19 +12171,11 @@
     "frameworks": {
       "netcoreapp2.2": {
         "dependencies": {
-          "EntityFramework.SqlServerCompact": {
-            "target": "Package",
-            "version": "[6.2.0, )"
-          },
           "Microsoft.AspNetCore.App": {
             "suppressParent": "All",
             "target": "Package",
             "version": "[2.2.0, )",
             "autoReferenced": true
-          },
-          "Microsoft.AspNetCore.Cryptography.KeyDerivation": {
-            "target": "Package",
-            "version": "[2.2.0, )"
           },
           "Microsoft.AspNetCore.Razor.Design": {
             "suppressParent": "All",
@@ -12232,17 +12196,5 @@
         "warn": true
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'EntityFramework.SqlServerCompact 6.2.0' was restored using '.NETFramework,Version=v4.6.1' instead of the project target framework '.NETCoreApp,Version=v2.2'. This package may not be fully compatible with your project.",
-      "libraryId": "EntityFramework.SqlServerCompact",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v2.2"
-      ]
-    }
-  ]
+  }
 }
