@@ -4,6 +4,7 @@ using LetsLearn.Repos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace LetsLearn.Controllers
@@ -20,11 +21,18 @@ namespace LetsLearn.Controllers
         [HttpGet]
         public IActionResult Student()
         {
-            String Id = Request.Cookies["Id"].ToString();
-            Task<User> user = _userRepository.GetById<User>(Id);
-            @ViewBag.student = user.Result.FirstName.ToString() + " " + user.Result.LastName.ToString();
+            if (Request.Cookies.ContainsKey("Id"))
+            {
+                String Id = Request.Cookies["Id"].ToString();
+                Task<User> user = _userRepository.GetById<User>(Id);
+                @ViewBag.student = user.Result.FirstName.ToString() + " " + user.Result.LastName.ToString();
 
-            return View();
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("LogIn", "Account");
+            }
 
         }
 
@@ -61,5 +69,9 @@ namespace LetsLearn.Controllers
 
             return View();
         }
+
+       
+
+       
     }
 }

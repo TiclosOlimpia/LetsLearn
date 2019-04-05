@@ -4146,6 +4146,7 @@ input[type="button"].btn-block {
 }
 
 .navbar {
+  background-color : bisque;
   position: relative;
   display: -ms-flexbox;
   display: flex;
@@ -4456,10 +4457,14 @@ input[type="button"].btn-block {
 
 .navbar-light .navbar-brand {
   color: rgba(0, 0, 0, 0.9);
+  background-color: bisque;
 }
+
+
 
 .navbar-light .navbar-brand:hover, .navbar-light .navbar-brand:focus {
   color: rgba(0, 0, 0, 0.9);
+    background-color: coral;
 }
 
 .navbar-light .navbar-nav .nav-link {
@@ -4679,6 +4684,7 @@ input[type="button"].btn-block {
 .card-deck .card {
   margin-bottom: 15px;
 }
+
 
 @media (min-width: 576px) {
   .card-deck {
@@ -6589,7 +6595,7 @@ button.bg-dark:focus {
 }
 
 .bg-white {
-  background-color: #fff !important;
+  background-color: #fff;
 }
 
 .bg-transparent {

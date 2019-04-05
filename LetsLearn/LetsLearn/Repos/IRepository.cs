@@ -1,6 +1,7 @@
 ﻿using LetsLearn.Data;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace LetsLearn.Repos
@@ -17,6 +18,9 @@ namespace LetsLearn.Repos
             where T : BaseEntity;
 
         Task<ICollection<T>> GetAll<T>()
+            where T : BaseEntity;
+
+        Task<ICollection<T>> Find<T>(Expression<Func<T,bool>> predicate)
             where T : BaseEntity;
 
         Task<T> GetById<T> (string Id)

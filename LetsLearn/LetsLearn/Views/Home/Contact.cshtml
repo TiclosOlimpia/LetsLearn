@@ -1,0 +1,81 @@
+﻿@model ContactModel
+@{
+    ViewData["Title"] = "COntact";
+}
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>COntact</title>
+    <link rel='stylesheet' type='text/css' href="/css/contact.css" media="all">
+    <link rel="icon" type="image/png" href="images/icons/favicon.png" />
+</head>
+<body>
+<h1>@ViewBag.msg</h1>
+<div class="grup">
+    <div id="Contact">
+        <div class="cadran">
+            <h1 class="form-title">Contacteaza-ne</h1>
+            <form method="post" asp-controller="Home" asp-action="Contact">
+                <div class="container">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label asp-for="EmailAddress" class="control-label">Email-ul tau</label>
+                        <input asp-for="EmailAddress" class="form-control" value="@ViewBag.email" />
+                    </div>
+                    <span asp-validation-for="EmailAddress" class="text-danger"></span>
+
+                    <div class="form-group">
+                        <label  asp-for="Password" class="control-label">Parola</label>
+                        <input type="password" asp-for="Password" class="form-control" />
+                    </div>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+
+
+                    <hr />
+                    <div class="form-group">
+                        <label asp-for="Subject" class="control-label">Subiect</label>
+                        <input asp-for="Subject" class="form-control" />
+                    </div>
+                    <span asp-validation-for="Subject" class="text-danger"></span>
+                    <hr />
+                    <div class="form-group">
+                        <label asp-for="Continut" class="control-label"></label>
+                        <textarea asp-for="Continut" class="form-control" id="Continut"></textarea>
+                    </div>
+                    <span asp-validation-for="Continut" class="text-danger"></span>
+                    <hr />
+
+
+                    <div class="group">
+                        <input type="submit" value="Trimite" class="signupbtn" />
+
+                    </div>
+                    <p><a asp-action="ReadCookie" asp-controller="Account">Read cookie</a></p>
+                    <p>@ViewBag.message</p>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <div class="contact-container">
+        <h1 id="contact-title">
+            Contacteza-ne
+        </h1>
+
+        <div class="contact-list">
+            <p><span>🌢 Adresa: </span>Facultatea de informatica - Iași (IS) </p>
+            <p><span>📞 Telefon: </span>+40 762 988 877 </p>
+            <p><span>📧 Email: </span><a href="MAILTO:olimpiaticlos@yahoo.com">letslearn@yahoo.com</a></p>
+            <p><span>🌍 Website: </span><a href="#">www.LetsLeaarn.ro</a></p>
+        </div>
+
+
+    </div>
+</div>
+</body>
+</html>

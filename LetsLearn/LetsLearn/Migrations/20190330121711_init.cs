@@ -45,7 +45,8 @@ namespace LetsLearn.Migrations
                     UserName = table.Column<string>(maxLength: 50, nullable: false),
                     Password = table.Column<string>(maxLength: 100, nullable: false),
                     EmailAddress = table.Column<string>(maxLength: 60, nullable: false),
-                    IsTeacher = table.Column<bool>(nullable: false)
+                    IsTeacher = table.Column<bool>(nullable: false),
+                    Clasa = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

@@ -58,6 +58,8 @@ namespace LetsLearn.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Clasa");
+
                     b.Property<string>("EmailAddress")
                         .IsRequired()
                         .HasMaxLength(60);

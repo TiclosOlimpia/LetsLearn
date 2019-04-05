@@ -28,6 +28,21 @@
                 <span asp-validation-for="EmailAddress" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Class" class="control-label"></label>
+              
+                <select asp-for="Class" class="text-control">
+                    <option class="form-control" value="-"> - </option>
+                    <option class="form-control" value="clasa I A"> clasa I A </option>
+                    <option class="form-control" value="clasa I B"> clasa I B</option>
+                    <option class="form-control" value="clasa a II-a A"> clasa a II-a A </option>
+                    <option class="form-control" value="clasa a II-a B">clasa a II-a B</option>
+                    <option class="form-control" value="clasa a II-a A"> clasa a III-a A </option>
+                    <option class="form-control" value="clasa a II-a B">clasa a III-a B</option>
+                    <option class="form-control" value="clasa a II-a A"> clasa a IV-a A </option>
+                    <option class="form-control" value="clasa a II-a B">clasa a IV-a B</option>
+                </select>
+            </div>
+            <div class="form-group">
                 <label asp-for="UserName" class="control-label"></label>
                 <input asp-for="UserName" class="form-control" />
                 <span asp-validation-for="UserName" class="text-danger"></span>
@@ -40,12 +55,11 @@
             <div class="form-group">
                 <label asp-for="ConfirmPassword" class="control-label"></label>
                 <input asp-for="ConfirmPassword" class="form-control" />
-                
+
             </div>
             <did class="form-group">
 
-                <input type="checkbox" asp-for="IsStudent" />Sunt student <br />
-                <input type="checkbox" asp-for="IsTeacher" />Sunt profesor <br />
+                <input type="checkbox" asp-for="IsTeacher"/> Sunt Profesor <br />
             </did>
             <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             <div class="group">

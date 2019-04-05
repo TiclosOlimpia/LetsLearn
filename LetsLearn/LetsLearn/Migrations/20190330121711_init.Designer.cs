@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LetsLearn.Migrations
 {
     [DbContext(typeof(ManagementContext))]
-    [Migration("20190328100119_init")]
+    [Migration("20190330121711_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -59,6 +59,8 @@ namespace LetsLearn.Migrations
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Clasa");
 
                     b.Property<string>("EmailAddress")
                         .IsRequired()

@@ -36,7 +36,9 @@ namespace LetsLearn.Models
 
         
         public bool IsTeacher { get; set; }
-        public bool IsStudent { get; set; }
+      
+
+        public string Class { get; set; }
 
 
     }

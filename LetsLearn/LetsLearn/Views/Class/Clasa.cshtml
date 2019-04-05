@@ -1,4 +1,6 @@
-﻿@model ClasaModel
+﻿@using Microsoft.AspNetCore.Razor.Language.Extensions
+@model IEnumerable<ClasaModel>
+
 @{
     ViewData["Title"] = "Clasa";
 }
@@ -12,6 +14,25 @@
 
 </head>
 <body>
-    <h1>@ViewBag.clasa</h1>
+<h1>@ViewBag.clasa</h1>
+<tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailAddress)
+            </td>
+        </tr>
+    }
+</tbody>
 </body>
 </html>

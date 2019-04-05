@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace LetsLearn.Repos
@@ -35,6 +37,7 @@ namespace LetsLearn.Repos
             return await _context.Set<T>().ToListAsync();
         }
 
+
         public async Task<T> GetById<T>(string Id) where T : BaseEntity
         {
             return await _context.Set<T>().SingleOrDefaultAsync(p => p.Id == Id);
@@ -50,6 +53,9 @@ namespace LetsLearn.Repos
             _context.SaveChanges();
         }
 
-      
+        public async Task<ICollection<T>> Find<T>(Expression<Func<T, bool>> predicate) where T : BaseEntity
+        {
+            return await _context.Set<T>().Where(predicate).ToListAsync();
+        }
     }
 }

@@ -64,23 +64,43 @@ namespace LetsLearn.Controllers
 
                 if (ok == false)
                 {
-                  
-                    User user = new User
+                    User user = new User();
+                    if (model.Class.ToString() == "-")
+                    {
+                        user = new User
+                        (model.FirstName, model.LastName, model.UserName, ComputeSha256Hash(model.Password),
+                            model.EmailAddress, model.IsTeacher, null);
+
+                        _userRepository.Create<User>(user);
+                        _userRepository.Save();
+                    }
+                    else
+                    {
+                       user = new User
                     (model.FirstName, model.LastName, model.UserName, ComputeSha256Hash(model.Password),
-                        model.EmailAddress, model.IsTeacher);
+                        model.EmailAddress, model.IsTeacher, model.Class.ToString());
 
                     _userRepository.Create<User>(user);
                     _userRepository.Save();
+                     
+                    }
+                    CookieOptions cookieOptions = new CookieOptions();
+                    cookieOptions.IsEssential = true;
+                    Response.Cookies.Append("userName", model.UserName, cookieOptions);
+                    Response.Cookies.Append("pasword", ComputeSha256Hash(model.Password), cookieOptions);
+                    Response.Cookies.Append("Id", user.Id, cookieOptions);
                     if (model.IsTeacher)
                     {
+
                         return RedirectToAction("Teacher", "Users");
+                    }
                     }
                     else
                     {
                         return RedirectToAction("Student", "Users");
                     }
                     
-                }
+                
 
             }
 
