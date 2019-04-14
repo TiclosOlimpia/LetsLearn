@@ -26,7 +26,13 @@ namespace LetsLearn.Migrations
 
                     b.Property<DateTime>("Date");
 
+                    b.Property<bool>("Homework");
+
+                    b.Property<string>("StudentId");
+
                     b.Property<int>("Value");
+
+                    b.Property<int>("Week");
 
                     b.HasKey("Id");
 
@@ -67,6 +73,9 @@ namespace LetsLearn.Migrations
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(50);
+
+                    b.Property<string>("Image")
+                        .HasMaxLength(60);
 
                     b.Property<bool>("IsTeacher");
 

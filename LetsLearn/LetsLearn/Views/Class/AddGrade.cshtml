@@ -1,0 +1,41 @@
+﻿@using Microsoft.AspNetCore.Razor.Language.Extensions
+@model GradeModel
+
+<h2>Adauga o nota</h2>
+<h3>@ViewBag.StudId</h3>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <h3></h3>
+        <form asp-action="Create" asp-route-id ="@ViewBag.StudId">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Week" class="control-label"></label>
+                <input asp-for="Week" class="form-control" />
+                <span asp-validation-for="Week" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Value" class="control-label"></label>
+                <input asp-for="Value" class="form-control" asp/>
+                <span asp-validation-for="Value" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Homework" class="control-label"></label>
+                <input asp-for="Homework" class="form-control" />
+                <span asp-validation-for="Homework" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="AddGrade" onclick="Class/@ViewBag.Id" class="btn btn-default" />
+            </div>
+        </form>
+        
+    </div>
+</div>
+

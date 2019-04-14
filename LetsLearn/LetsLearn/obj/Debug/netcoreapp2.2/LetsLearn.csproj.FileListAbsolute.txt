@@ -35,3 +35,6 @@ C:\Scoala\Licenta\LetsLearn\LetsLearn\LetsLearn\obj\Debug\netcoreapp2.2\Razor\Vi
 C:\Scoala\Licenta\LetsLearn\LetsLearn\LetsLearn\obj\Debug\netcoreapp2.2\Razor\Views\Users\Teacher.g.cshtml.cs
 C:\Scoala\Licenta\LetsLearn\LetsLearn\LetsLearn\obj\Debug\netcoreapp2.2\Razor\Views\Class\Clasa.g.cshtml.cs
 C:\Scoala\Licenta\LetsLearn\LetsLearn\LetsLearn\obj\Debug\netcoreapp2.2\Razor\Views\Home\Contact.g.cshtml.cs
+C:\Scoala\Licenta\LetsLearn\LetsLearn\LetsLearn\obj\Debug\netcoreapp2.2\Razor\Views\Class\StudentDetail.g.cshtml.cs
+C:\Scoala\Licenta\LetsLearn\LetsLearn\LetsLearn\obj\Debug\netcoreapp2.2\Razor\Views\Class\AddGrade.g.cshtml.cs
+C:\Scoala\Licenta\LetsLearn\LetsLearn\LetsLearn\obj\Debug\netcoreapp2.2\Razor\Views\Users\Edit.g.cshtml.cs

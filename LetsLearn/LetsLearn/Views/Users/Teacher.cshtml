@@ -8,10 +8,30 @@
 <html>
 <head>
     <title>Teachert</title>
-
+    <link rel='stylesheet' type='text/css' href="/css/profile.css" media="all">
 </head>
 <body>
-    <h1>Bine ati venit, @ViewBag.teacher</h1>
+<h1>Bine ati venit, @Html.DisplayFor(Model => Model.FirstName) @Html.DisplayFor(Model => Model.LastName) </h1>
+<hr/>
+<div class="teacher-data">
+    <img src="@Html.DisplayFor(Model=>Model.Image)"/>
+        <ul class="teacher-infos container">
+            <li>
+                <strong>Nume:</strong> @Html.DisplayFor((Model=>Model.LastName))
+            </li>
+            <li>
+                <strong> Prenume:</strong> @Html.DisplayFor(Model => Model.FirstName)
+            </li>
+            <li>
+                <strong>Email:</strong> @Html.DisplayFor(Model => Model.EmailAddress)
+            </li>
+            <li>
+                <strong>Nume de utilizator:</strong> @Html.DisplayFor(Model=>Model.UserName)
+            </li>
+        </ul>
+
+</div>
+
 <form method="post" asp-controller="Users" asp-action="Choose_class">
     <input type="submit" value="clasa I A" asp-for="clasa"/>
     <input type="submit" value="clasa I B" asp-for="clasa"/>

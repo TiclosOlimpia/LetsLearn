@@ -38,7 +38,7 @@ namespace LetsLearn
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddScoped<IRepository, Repository>().AddEntityFrameworkSqlServer();
-            services.AddDbContext<ManagementContext>(options => options.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=Licenta;Trusted_Connection=True;"));
+            services.AddDbContext<ManagementContext>(options => options.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=licenta;Trusted_Connection=True;"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

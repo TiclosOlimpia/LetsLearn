@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -12,16 +13,21 @@ using System.Text;
 using System.Web;
 using Microsoft.AspNetCore.Http;
 using System.Net;
+using Microsoft.AspNetCore.Hosting;
 
 namespace LetsLearn.Controllers
 {
     public class AccountController : Controller
     {
         private IRepository _userRepository;
+        private readonly IHostingEnvironment hostingEnvironment;
 
-        public AccountController(IRepository userRepository)
+
+        public AccountController(IRepository userRepository, IHostingEnvironment environment)
         {
             _userRepository = userRepository;
+
+            hostingEnvironment = environment;
         }
 
 
@@ -49,6 +55,7 @@ namespace LetsLearn.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterModel model)
         {
+           
             if (ModelState.IsValid)
             {
                 bool ok = false;
@@ -58,6 +65,13 @@ namespace LetsLearn.Controllers
                     if (i.UserName == model.UserName)
                     {
                         ok = true;
+                        @ViewBag.UserName = "Acest nume de utilizator exista deja in baza de date";
+                        return View();
+                    }
+                    if (i.EmailAddress == model.EmailAddress)
+                    {
+                        ok = true;
+                        @ViewBag.EmailAddress = "Acest email exista deja in baza de date";
                         return View();
                     }
                 }
@@ -67,40 +81,67 @@ namespace LetsLearn.Controllers
                     User user = new User();
                     if (model.Class.ToString() == "-")
                     {
-                        user = new User
-                        (model.FirstName, model.LastName, model.UserName, ComputeSha256Hash(model.Password),
-                            model.EmailAddress, model.IsTeacher, null);
+                        if (model.Image == null)
+                        {
+                            user = new User
+                            (model.FirstName, model.LastName, model.UserName, ComputeSha256Hash(model.Password),
+                                model.EmailAddress, model.IsTeacher, null,"/Images/anonim.jpg");
+                        }
+                        else
+                        {
+                            var fileImage = Path.Combine(hostingEnvironment.WebRootPath, Path.GetFileName("Images"),
+                                Path.GetFileName(model.Image.FileName));
+                            model.Image.CopyTo(new FileStream(fileImage, FileMode.Create));
+                            user = new User
+                            (model.FirstName, model.LastName, model.UserName, ComputeSha256Hash(model.Password),
+                                model.EmailAddress, model.IsTeacher, null, "/Images/" + Path.GetFileName(model.Image.FileName));
+
+                        }
 
                         _userRepository.Create<User>(user);
                         _userRepository.Save();
                     }
                     else
                     {
-                       user = new User
-                    (model.FirstName, model.LastName, model.UserName, ComputeSha256Hash(model.Password),
-                        model.EmailAddress, model.IsTeacher, model.Class.ToString());
+                        if (model.Image == null)
+                        {
+                            user = new User
+                            (model.FirstName, model.LastName, model.UserName, ComputeSha256Hash(model.Password),
+                                model.EmailAddress, model.IsTeacher, model.Class.ToString(), "/Images/anonim.jpg");
+                        }
+                        else
+                        {
+                            var fileImage = Path.Combine(hostingEnvironment.WebRootPath, Path.GetFileName("Images"),
+                                Path.GetFileName(model.Image.FileName));
+                            model.Image.CopyTo(new FileStream(fileImage, FileMode.Create));
 
-                    _userRepository.Create<User>(user);
-                    _userRepository.Save();
-                     
+                            var path = "/Images/" + Path.GetFileName(model.Image.FileName);
+                            user = new User
+                            (model.FirstName, model.LastName, model.UserName, ComputeSha256Hash(model.Password),
+                                model.EmailAddress, model.IsTeacher, model.Class.ToString(), path );
+                        }
+
+                        _userRepository.Create<User>(user);
+                        _userRepository.Save();
+
                     }
+
                     CookieOptions cookieOptions = new CookieOptions();
                     cookieOptions.IsEssential = true;
                     Response.Cookies.Append("userName", model.UserName, cookieOptions);
                     Response.Cookies.Append("pasword", ComputeSha256Hash(model.Password), cookieOptions);
                     Response.Cookies.Append("Id", user.Id, cookieOptions);
-                    if (model.IsTeacher)
+                    if (model.IsTeacher == true)
                     {
 
                         return RedirectToAction("Teacher", "Users");
-                    }
                     }
                     else
                     {
                         return RedirectToAction("Student", "Users");
                     }
-                    
-                
+
+                }
 
             }
 

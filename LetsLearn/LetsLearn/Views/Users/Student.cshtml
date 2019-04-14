@@ -1,4 +1,4 @@
-﻿@model StudentModel
+﻿@model LetsLearn.ViewModels.StudentViewModel
 @{
     ViewData["Title"] = "Student";
 }
@@ -8,9 +8,77 @@
 <html>
 <head>
     <title>Student</title>
-    
+    <link rel='stylesheet' type='text/css' href="/css/profile.css" media="all">
+
 </head>
 <body>
-    <h1>Bine ati venit, @ViewBag.student</h1>
+<h1>Bine ai venit, @ViewBag.student</h1>
+<hr />  
+
+
+<div id="continut">    
+
+
+    <img src="@Html.DisplayFor(model => model.student.Image)" />
+    <table id="Profile">
+
+
+        <tr>
+            <th id="Left">Nume</th>
+            <td id="Right">@Html.DisplayFor(model => model.student.LastName)</td>
+        </tr>
+        <tr>
+            <th id="Left">Prenume</th>
+            <td id="Right">@Html.DisplayFor(model => model.student.FirstName)</td>
+        </tr>
+
+        <tr>
+            <th id="Left">Email</th>
+            <td id="Right"> @Html.DisplayFor(model => model.student.EmailAddress) </td>
+        </tr>
+
+        <tr>
+            <th id="Left"> Nume de utilizator</th>
+            <td id="Right"> @Html.DisplayFor(model => model.student.UserName) </td>
+        </tr>
+
+
+    </table>
+    
+ </div>   
+    <a asp-action="Edit" asp-controller="Users" asp-route-id="@Html.ViewData.Model.student.Id" id="Edit">Editeaza profilul</a> 
+<hr/>
+    
+<div>
+
+    
+    <details>
+    <summary>Verifica situatia</summary>
+    <table class="table table-bordered">
+        <tr>
+            <th>Saptamana</th>
+            <th>Data</th>
+            <th>Nota</th>
+            <th>Tema?</th>
+        </tr>
+        @foreach (var item in Model.grades)
+        {
+            <tr>
+                <td> @item.Week</td>
+                <td>@item.Date</td>
+                <td>@item.Value</td>
+                <td>@item.Homework</td>
+            </tr>
+        }
+
+           
+    </table>
+    </details>
+
+
+
+</div>
+
+
 </body>
 </html>

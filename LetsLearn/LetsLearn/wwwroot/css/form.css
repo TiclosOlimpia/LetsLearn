@@ -13,7 +13,7 @@
 
 .form-title{
     display: block;
-    background-color: #0d633f;
+    background-color:darkslategrey;
     color: white;
     font-size: 200%;
     margin-top: 0;
@@ -26,11 +26,11 @@ input[type=text], input[type=password], option, textarea {
     margin: 5px 0 22px 0;
     display: inline-block;
     border: none;
-    background: #9fd8bd;
+    background:bisque;
 }
 
 input[type=text]:focus, input[type=password]:focus, option:focus, textarea:focus {
-    background-color: rgb(177, 230, 186);
+    background-color:antiquewhite;
     outline: none;
 }
 
@@ -52,7 +52,7 @@ label
 .signupbtn {
     width: 20%;
     height: 30px;
-    background:linear-gradient(to bottom, #11d69e 5%, #033d1f 100%);
+    background:linear-gradient(to bottom, coral 5%, coral 100%);
     background-color:#0d633f;
 }
 
@@ -75,7 +75,7 @@ label
     background-color: #f1f1f1;
     z-index: 1; 
     left: 0;
-    top: 0;
+    top: 10px;
     margin-bottom: 100px;
     display: block;
     margin-left: auto;
@@ -83,6 +83,7 @@ label
     width: 40%; 
     height: 200%;
     border: 1px solid #888;
+   
     
 }
 
@@ -96,9 +97,6 @@ hr {
     margin-bottom: 25px;
 }
 
-footer{
-    background-color: white;
-}
 
 #Register .form-group{
     display: flex;

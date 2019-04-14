@@ -8,6 +8,7 @@ namespace LetsLearn.Models
 {
     public class ClasaModel
     {
+        public  string Id { get; set; }
         [Required]
         [StringLength(50, MinimumLength = 3)]
         public string FirstName { get; set; }
@@ -33,8 +34,6 @@ namespace LetsLearn.Models
         [Required]
         [StringLength(60, MinimumLength = 5)]
         public string EmailAddress { get; set; }
-
-
 
         public string Class { get; set; }
 

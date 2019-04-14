@@ -129,9 +129,14 @@ namespace LetsLearn.Controllers
                     {
                         client.Connect("smtp.gmail.com", 587, false);
                     }
-                    else
+                    else if (extension=="yahoo.com")
                     {
                         client.Connect("smtp.mail.yahoo.com", 465, false);
+                    }
+                    else
+                    {
+                        Exception e = new Exception("email neacceptat");
+                        throw e;
                     }
 
                     client.Authenticate(model.EmailAddress.ToString(),model.Password.ToString());

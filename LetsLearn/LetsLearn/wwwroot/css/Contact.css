@@ -65,7 +65,7 @@ label
 .signupbtn {
     width: auto;
     height: 30px;
-    background:linear-gradient(to bottom, #11d69e 5%, #033d1f 100%);
+    background:linear-gradient(to bottom, coral 5%, coral 100%);
     background-color:#0d633f;
 }
 
@@ -140,9 +140,6 @@ hr {
     padding: 0;
 }
 
-footer{
-    background-color: white;
-}
 
 #Register .form-group{
     display: flex;

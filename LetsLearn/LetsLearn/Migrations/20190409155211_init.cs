@@ -13,7 +13,10 @@ namespace LetsLearn.Migrations
                 {
                     Id = table.Column<string>(nullable: false),
                     Value = table.Column<int>(nullable: false),
-                    Date = table.Column<DateTime>(nullable: false)
+                    Date = table.Column<DateTime>(nullable: false),
+                    Week = table.Column<int>(nullable: false),
+                    Homework = table.Column<bool>(nullable: false),
+                    StudentId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -46,6 +49,7 @@ namespace LetsLearn.Migrations
                     Password = table.Column<string>(maxLength: 100, nullable: false),
                     EmailAddress = table.Column<string>(maxLength: 60, nullable: false),
                     IsTeacher = table.Column<bool>(nullable: false),
+                    Image = table.Column<string>(maxLength: 60, nullable: true),
                     Clasa = table.Column<string>(nullable: true)
                 },
                 constraints: table =>

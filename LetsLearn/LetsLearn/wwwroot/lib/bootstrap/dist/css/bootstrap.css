@@ -4183,6 +4183,7 @@ input[type="button"].btn-block {
 
 .navbar-brand:hover, .navbar-brand:focus {
   text-decoration: none;
+  font-weight: bold;
 }
 
 .navbar-nav {
@@ -6592,10 +6593,6 @@ a.bg-dark:hover, a.bg-dark:focus,
 button.bg-dark:hover,
 button.bg-dark:focus {
   background-color: #1d2124 !important;
-}
-
-.bg-white {
-  background-color: #fff;
 }
 
 .bg-transparent {

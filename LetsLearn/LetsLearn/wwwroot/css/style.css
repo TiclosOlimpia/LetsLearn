@@ -3,15 +3,13 @@ for details on configuring this project to bundle and minify static web assets. 
 
 a.navbar-brand {
     font-weight: bold;
-    background-image: linear-gradient(bisque, coral);
+
     white-space: normal;
     text-align: center;
     word-break: break-all;
 }
 
-navbar-brand :hover {
-    background-color:coral;
-}
+
     /* Sticky footer styles
 -------------------------------------------------- */
     html {
@@ -62,4 +60,10 @@ body {
 
 header, nav, footer {
     background-color: bisque;
+}
+
+.navbar-link:hover{
+    font-weight: bold;
+    color: black;
+    color: black;
 }

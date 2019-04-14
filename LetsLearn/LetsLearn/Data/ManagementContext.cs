@@ -11,7 +11,7 @@ namespace LetsLearn.Data
     {
         public ManagementContext(DbContextOptions<ManagementContext> options) : base(options)
         {
-            Database.EnsureCreated();
+           Database.EnsureCreated();
         }
 
         public ManagementContext()

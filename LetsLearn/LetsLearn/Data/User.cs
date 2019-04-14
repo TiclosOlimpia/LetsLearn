@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 
 
 namespace LetsLearn.Data
@@ -13,7 +14,7 @@ namespace LetsLearn.Data
         }
 
         public User(string firstName, string lastName, string userName, string password, string emailAddress,
-            bool isTeacher, string clasa)
+            bool isTeacher, string clasa, string image)
         {
             Id = Guid.NewGuid().ToString();
             //Guard.ArgumentNotNullOrEmpty(firstName, nameof(firstName));
@@ -28,6 +29,7 @@ namespace LetsLearn.Data
             EmailAddress = emailAddress;
             IsTeacher = isTeacher;
             Clasa = clasa;
+            Image = image;
             //Type = type;
         }
 
@@ -44,17 +46,23 @@ namespace LetsLearn.Data
         public string UserName { get; set; }
 
         [Required]
-        [StringLength(100,MinimumLength = 5)]
+        [StringLength(100, MinimumLength = 5)]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
+
+        
 
         [Required]
         [StringLength(60, MinimumLength = 5)]
         public string EmailAddress { get; set; }
-        public object Guard { get; }
+
+
 
         [Required]
         public bool IsTeacher { get; set; }
 
+        [StringLength(60, MinimumLength = 5)]
+        public string Image { get; set; }
 
         public string Clasa { get; set; }
         //[Required]
@@ -63,13 +71,6 @@ namespace LetsLearn.Data
 
         //public Homework Homework { get; set; }
 
-
-        public void SetId(string id)
-        {
-            Id = id;
-
-
-        }
 
         public IEnumerable<User_homework> User_homework { get; set; }
 

@@ -15,7 +15,7 @@
 </head>
 <body>
 <h1>@ViewBag.msg</h1>
-<div class="grup">
+<div class="grup" >
     <div id="Contact">
         <div class="cadran">
             <h1 class="form-title">Contacteaza-ne</h1>
@@ -28,7 +28,8 @@
                         <input asp-for="EmailAddress" class="form-control" value="@ViewBag.email" />
                     </div>
                     <span asp-validation-for="EmailAddress" class="text-danger"></span>
-
+                    
+                    <hr/>
                     <div class="form-group">
                         <label  asp-for="Password" class="control-label">Parola</label>
                         <input type="password" asp-for="Password" class="form-control" />
@@ -64,11 +65,11 @@
     </div>
     <div class="contact-container">
         <h1 id="contact-title">
-            Contacteza-ne
+            Contacteaza-ne
         </h1>
 
         <div class="contact-list">
-            <p><span>🌢 Adresa: </span>Facultatea de informatica - Iași (IS) </p>
+            <p><span>🌢 Adresa: </span>Facultatea de Informatica - Iași</p>
             <p><span>📞 Telefon: </span>+40 762 988 877 </p>
             <p><span>📧 Email: </span><a href="MAILTO:olimpiaticlos@yahoo.com">letslearn@yahoo.com</a></p>
             <p><span>🌍 Website: </span><a href="#">www.LetsLeaarn.ro</a></p>

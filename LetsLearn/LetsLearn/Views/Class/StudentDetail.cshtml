@@ -1,0 +1,72 @@
+﻿@using Microsoft.AspNetCore.Razor.Language.Extensions
+@model LetsLearn.ViewModels.StudentDetailViewModel
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link rel='stylesheet' type='text/css' href="/css/detail.css" media="all">
+    <title>Detalii despre @Html.DisplayFor(model => model.student.FirstName)</title>
+</head>
+<body>
+    <div>
+
+        <a asp-action="Clasa">Inpoi la @Html.DisplayFor(model => model.student.Class) </a>
+    </div>
+    <div>
+
+        <h3>Detalii despre @Html.DisplayFor(model => model.student.FirstName)</h3>
+        <hr />
+        <table id="Infos">
+            
+       
+            <tr>
+                <th id="Left">Nume</th>
+                <td>@Html.DisplayFor(model => model.student.LastName)</td>
+            </tr>
+            <tr>
+                <th id="Left">Prenume</th>
+                <td>@Html.DisplayFor(model => model.student.FirstName)</td>
+            </tr>
+
+            <tr>
+                <th id="Left">Email</th>
+                <td> @Html.DisplayFor(model => model.student.EmailAddress) </td>
+            </tr>
+        
+        </table>
+
+    </div>
+    
+   
+    <div>
+
+        <h3>Note</h3>
+        <hr />
+        <table class="table table-bordered">
+            <tr>
+                <th>Saptamana</th>
+                <th>Data</th>
+                <th>Nota</th>
+                <th>Tema?</th>
+            </tr>
+            @foreach (var item in Model.grades)
+            {
+                <tr>
+                    <td> @item.Week</td>
+                    <td>@item.Date</td>
+                    <td>@item.Value</td>
+                    <td>@item.Homework</td>
+                </tr>
+            }
+
+           
+        </table>
+        
+        <a asp-action="AddGrade" asp-route-id="@Html.ViewData.Model.student.Id" >Adauga o nota</a>
+
+
+    </div>
+
+</body>
+</html>

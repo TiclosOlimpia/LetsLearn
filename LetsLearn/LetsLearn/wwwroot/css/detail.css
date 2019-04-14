@@ -1,0 +1,58 @@
+﻿h3{
+    text-align: center;
+}
+
+#Infos {
+     position: relative;
+     left: 20%;
+     top: 30%;
+     border: 1px solid #ccc;
+     padding: 10px 10px;
+     width: 700px;
+     height: 200px;
+     font-size: 16px;
+     margin: 30px;
+     font-family: Verdana;
+ }
+
+
+#Infos td {
+    width: 25%;
+    display: block;
+    margin-left: 20%;
+
+}
+
+#Infos tr {
+    height: 33px;
+    border-left: 1px solid #ccc;
+}
+
+#Infos td, th {
+    text-align: center;
+    width: 150px;
+    padding: 5px;
+    height: 60px;
+    border-bottom: 1px solid #ccc;
+}
+
+#Left {
+    background-color: darkslategray;
+    color: white;
+}
+
+button {
+    background-color:white;
+    border-width: 0.5px;
+    border-color: #ccc;
+    height: 40px;
+    color: black;
+    width: 100px;
+    height: 50px;
+}
+
+button:hover {
+    background-color: #33ccff;
+}
+
+

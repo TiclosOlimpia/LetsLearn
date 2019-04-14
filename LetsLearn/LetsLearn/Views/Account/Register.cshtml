@@ -3,33 +3,36 @@
     ViewData["Title"] = "Register";
 }
 <head>
-    <link rel='stylesheet' type='text/css' href="/css/account.css" media="all">
+    <link rel='stylesheet' type='text/css' href="/css/form.css" media="all">
 </head>
 
 <div id="Register">
     <div class="content">
         <h1 class="form-title">Register</h1>
-        <form method="post" asp-controller="Account" asp-action="Register">
+        <form method="post" asp-controller="Account" asp-action="Register" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
-            </div>
+            <span asp-validation-for="LastName" class="text-danger"></span>
             <div class="form-group">
                 <label asp-for="LastName" class="control-label"></label>
                 <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
+
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" />
+            </div>
+
+            <span asp-validation-for="EmailAddress" class="text-danger">@ViewBag.EmailAddress</span>
             <div class="form-group">
                 <label asp-for="EmailAddress" class="control-label"></label>
                 <input asp-for="EmailAddress" class="form-control" />
-                <span asp-validation-for="EmailAddress" class="text-danger"></span>
             </div>
+
+
             <div class="form-group">
                 <label asp-for="Class" class="control-label"></label>
-              
                 <select asp-for="Class" class="text-control">
                     <option class="form-control" value="-"> - </option>
                     <option class="form-control" value="clasa I A"> clasa I A </option>
@@ -41,27 +44,38 @@
                     <option class="form-control" value="clasa a II-a A"> clasa a IV-a A </option>
                     <option class="form-control" value="clasa a II-a B">clasa a IV-a B</option>
                 </select>
+                <span></span>
             </div>
+
+            <span asp-validation-for="UserName" class="text-danger">@ViewBag.UserName</span>
             <div class="form-group">
-                <label asp-for="UserName" class="control-label"></label>
+                <label asp-for="UserName" class="control-label">Nume de utilizator</label>
                 <input asp-for="UserName" class="form-control" />
-                <span asp-validation-for="UserName" class="text-danger"></span>
             </div>
+
+            <span asp-validation-for="Password" class="text-danger"></span>
             <div class="form-group">
                 <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
+                <input asp-for="Password" type="password" class="form-control" />
             </div>
+
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             <div class="form-group">
                 <label asp-for="ConfirmPassword" class="control-label"></label>
                 <input asp-for="ConfirmPassword" class="form-control" />
-
             </div>
-            <did class="form-group">
+            
+            <div class="form-group">
+                <label asp-for="Image"></label>
+                <input asp-for="Image" type="file" value="Alege o fotogratie" title="Alege o fotografie" as/>
+            </div>
+            
 
-                <input type="checkbox" asp-for="IsTeacher"/> Sunt Profesor <br />
+            <did class="form-group">
+                <input type="checkbox" asp-for="IsTeacher" /> Sunt Profesor <br />
             </did>
-            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+
+
             <div class="group">
                 <input type="submit" value="Register" class="signupbtn" />
                 <a href="LogIn" class="alternative">LogIn daca ai deja un cont </a>
