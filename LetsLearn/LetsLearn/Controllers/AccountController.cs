@@ -85,7 +85,7 @@ namespace LetsLearn.Controllers
                         {
                             user = new User
                             (model.FirstName, model.LastName, model.UserName, ComputeSha256Hash(model.Password),
-                                model.EmailAddress, model.IsTeacher, null,"/Images/anonim.jpg");
+                                model.EmailAddress, model.IsTeacher, null,"/Images/anonim.jpg", 0);
                         }
                         else
                         {
@@ -94,7 +94,7 @@ namespace LetsLearn.Controllers
                             model.Image.CopyTo(new FileStream(fileImage, FileMode.Create));
                             user = new User
                             (model.FirstName, model.LastName, model.UserName, ComputeSha256Hash(model.Password),
-                                model.EmailAddress, model.IsTeacher, null, "/Images/" + Path.GetFileName(model.Image.FileName));
+                                model.EmailAddress, model.IsTeacher, null, "/Images/" + Path.GetFileName(model.Image.FileName), 0);
 
                         }
 
@@ -107,7 +107,7 @@ namespace LetsLearn.Controllers
                         {
                             user = new User
                             (model.FirstName, model.LastName, model.UserName, ComputeSha256Hash(model.Password),
-                                model.EmailAddress, model.IsTeacher, model.Class.ToString(), "/Images/anonim.jpg");
+                                model.EmailAddress, model.IsTeacher, model.Class.ToString(), "/Images/anonim.jpg", 0);
                         }
                         else
                         {
@@ -118,7 +118,7 @@ namespace LetsLearn.Controllers
                             var path = "/Images/" + Path.GetFileName(model.Image.FileName);
                             user = new User
                             (model.FirstName, model.LastName, model.UserName, ComputeSha256Hash(model.Password),
-                                model.EmailAddress, model.IsTeacher, model.Class.ToString(), path );
+                                model.EmailAddress, model.IsTeacher, model.Class.ToString(), path, 0 );
                         }
 
                         _userRepository.Create<User>(user);

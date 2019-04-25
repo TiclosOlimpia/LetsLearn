@@ -39,6 +39,7 @@ namespace LetsLearn.Controllers
 
             }
 
+            @ViewBag.clasa = clasa;
             return View(models);
         }
 
@@ -108,6 +109,33 @@ namespace LetsLearn.Controllers
            
             return RedirectToAction("StudentDetail", new{id = id});
         }
+        [HttpGet]
+        public IActionResult AddHomework(string clasa)
+        {
+            @ViewBag.Clasa = Request.Cookies["clasa"].ToString();
+            return View();
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddHomework(AddHomeworkModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                string clasa = Request.Cookies["clasa"].ToString();
+                var homework = new Homework(model.Title, model.Container, model.CorrectAnsear , model.Ansear1,
+                    model.Ansear2, model.Ansear3, model.Week, model.DateStart, model.DateEnd, clasa);
+                _userRepository.Create<Homework>(homework);
+                _userRepository.Save();
+
+                return RedirectToAction("Clasa", "Class");
+            }
+
+
+            return RedirectToAction("AddHomework");
+        }
+
+
 
     }
 }

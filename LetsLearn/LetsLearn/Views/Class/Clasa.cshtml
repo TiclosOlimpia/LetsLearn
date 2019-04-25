@@ -11,41 +11,39 @@
 <html>
 <head>
     <title>Clasa</title>
-
+    <link rel='stylesheet' type='text/css' href="/css/clasaDetail.css" media="all">
 </head>
 <body>
 
-    <div class="container">
-        <h1>@ViewBag.clasa</h1>
-        <table class="table table-bordered">
-            <tr>
-                <th>Prenume</th>
-                <th>Nume</th>
-                <th>Clasa</th>
-                <th>Email</th>
-            </tr>
-            @foreach (var item in Model)
-            {
-                <tr>
+<div class="container">
+    <h1>@ViewBag.clasa</h1>
+    <hr/>
+    <div class="detaliiClasa">
+        <div class="titlu">
+            <p>Nume</p>
+            <p>Medie</p>
+            <p>Detalii</p>
+        </div>
 
-                    <td>
-                        @item.FirstName
-                    </td>
-                    <td>
-                        @item.LastName
-                    </td>
-                    <td>
-                        @item.Class
-                    </td>
-                    <td>
-                        @item.EmailAddress
-                    </td>
-                    <td><a asp-action="StudentDetail" asp-route-id="@item.Id">Detalii</a></td>
+        @foreach (var item in Model)
+        {
+            <div class="continut">
+                <p>
+                    @item.LastName @item.FirstName
+                </p>
+                <p>
+                    @item.Medie
+                </p>
+                <p><a asp-action="StudentDetail" asp-route-id="@item.Id">🔍</a></p>
+             </div>
+         }
+     </div>
+  
+</div>
 
-                </tr>
-            }
-        </table>
-    </div>
+<a asp-action="AddHomework" asp-controller="Class" asp-route-id="@ViewBag.clasa" id="Class">Adauga o tema</a> 
+
+
  
 </body>
 </html>

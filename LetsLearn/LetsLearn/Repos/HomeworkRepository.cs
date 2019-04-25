@@ -10,6 +10,7 @@ namespace LetsLearn.Repos
     {
         public HomeworkRepository(ManagementContext teacherContext) : base(teacherContext)
         {
+
         }
     }
 }

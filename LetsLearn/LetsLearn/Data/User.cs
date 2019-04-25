@@ -14,7 +14,7 @@ namespace LetsLearn.Data
         }
 
         public User(string firstName, string lastName, string userName, string password, string emailAddress,
-            bool isTeacher, string clasa, string image)
+            bool isTeacher, string clasa, string image, float medie)
         {
             Id = Guid.NewGuid().ToString();
             //Guard.ArgumentNotNullOrEmpty(firstName, nameof(firstName));
@@ -30,6 +30,7 @@ namespace LetsLearn.Data
             IsTeacher = isTeacher;
             Clasa = clasa;
             Image = image;
+            Medie = medie;
             //Type = type;
         }
 
@@ -65,14 +66,13 @@ namespace LetsLearn.Data
         public string Image { get; set; }
 
         public string Clasa { get; set; }
+
+        public float Medie { get; set; }
         //[Required]
         //[StringLength(8, MinimumLength = 6)]
         //public string Type { get; set; }
 
         //public Homework Homework { get; set; }
-
-
-        public IEnumerable<User_homework> User_homework { get; set; }
 
         //public ICollection<Homework> Homeworks { get; set; }
 

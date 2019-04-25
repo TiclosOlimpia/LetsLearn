@@ -1,0 +1,94 @@
+﻿
+body {
+    background-image: linear-gradient(to right, rgba(0,0,0,0.21), rgba(1,0,0,0.2), rgba(0,0,0,0.1), rgba(255,0,0,0.5));
+   
+}
+
+.container {
+    
+    width: 100%;
+}
+
+.detaliiClasa {
+
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1 {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: black;
+    margin: 5%;
+    text-align: center;
+
+}
+
+.studentsTabel{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+    text-align: center;
+}
+.titlu {
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.titlu p
+{
+    color: white;
+    text-shadow: 1px 1px    gray;
+    background-image: linear-gradient(to right, rgba(1,1,1,1), rgba(210,40,25,0.8), rgba(1,1,1,1));
+    text-align: center;
+    width: 200px;
+    margin:2%;
+    height: 50px;
+    padding: 2%;
+    font-weight: bold;
+
+}
+
+.titlu p:hover{
+    background-image: linear-gradient(to right, rgba(1,1,1,0.8), rgba(180,40,25,0.5), rgba(1,1,1,0.8));
+}
+
+.continut p {
+    padding: 1%;
+    font-weight: bold;
+    text-align: center;
+    width: 200px;
+    height: 50px;
+    color: rgba(20, 0, 0, 1);
+    text-shadow: 1px 1px white;
+    background-image: linear-gradient(to right, rgba(0,0,0,0.5), rgba(255,0,0,0.3));
+    box-shadow: 2px 2px black;
+}
+
+    .continut p:hover {
+        background-image: linear-gradient(to right, rgba(255,255,255,1), rgba(0,0,0,1));
+    }
+
+.continut a{
+    text-shadow: 2px 1px white;
+}
+
+.continut a:hover {
+    text-decoration: none;
+    font-size: 180%;
+   
+}
+
+
+
+.continut {
+    text-align: center; 
+    display: flex;
+    justify-content: space-around;
+    margin-left: auto;
+    margin-right: auto;
+}

@@ -1,0 +1,65 @@
+﻿@using Microsoft.AspNetCore.Razor.Language.Extensions
+@model LetsLearn.Models.AddHomeworkModel
+
+<h2>Adauga o tema</h2>
+<h3>@ViewBag.Clasa</h3>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <h3></h3>
+        <form asp-action="AddHomework" asp-route-id="@ViewBag.Clasa">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Week" class="control-label"></label>
+                <input asp-for="Week" class="form-control" />
+                <span asp-validation-for="Week" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateStart" class="control-label"></label>
+                <input asp-for="DateStart" class="form-control" />
+                <span asp-validation-for="DateStart" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateEnd" class="control-label"></label>
+                <input asp-for="DateEnd" class="form-control" />
+                <span asp-validation-for="DateEnd" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" asp />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Container" class="control-label"></label>
+                <input asp-for="Container" class="form-control" />
+                <span asp-validation-for="Container" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CorrectAnsear" class="control-label"></label>
+                <input asp-for="CorrectAnsear" class="form-control" />
+                <span asp-validation-for="CorrectAnsear" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ansear1" class="control-label"></label>
+                <input asp-for="Ansear1" class="form-control" />
+                <span asp-validation-for="Ansear1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ansear2" class="control-label"></label>
+                <input asp-for="Ansear2" class="form-control" />
+                <span asp-validation-for="Ansear2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ansear3" class="control-label"></label>
+                <input asp-for="Ansear3" class="form-control" />
+                <span asp-validation-for="Ansear3" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="AddGrade" onclick="Class/@ViewBag.Clasa" class="btn btn-default" />
+            </div>
+        </form>
+        
+    </div>
+</div>
+

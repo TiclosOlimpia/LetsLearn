@@ -11,38 +11,72 @@
     <link rel='stylesheet' type='text/css' href="/css/profile.css" media="all">
 </head>
 <body>
-<h1>Bine ati venit, @Html.DisplayFor(Model => Model.FirstName) @Html.DisplayFor(Model => Model.LastName) </h1>
-<hr/>
-<div class="teacher-data">
-    <img src="@Html.DisplayFor(Model=>Model.Image)"/>
-        <ul class="teacher-infos container">
-            <li>
-                <strong>Nume:</strong> @Html.DisplayFor((Model=>Model.LastName))
-            </li>
-            <li>
-                <strong> Prenume:</strong> @Html.DisplayFor(Model => Model.FirstName)
-            </li>
-            <li>
-                <strong>Email:</strong> @Html.DisplayFor(Model => Model.EmailAddress)
-            </li>
-            <li>
-                <strong>Nume de utilizator:</strong> @Html.DisplayFor(Model=>Model.UserName)
-            </li>
-        </ul>
+    <h1>Bine ati venit, @Html.DisplayFor(Model => Model.FirstName) @Html.DisplayFor(Model => Model.LastName) </h1>
+    <hr />
+    <div class="teacher-data">
+        <img src="@Html.DisplayFor(Model=>Model.Image)" />
+        <table class="teacher-infos container">
+            <tr>
+                <th> Nume </th>
+                <td> @Html.DisplayFor((Model => Model.LastName)) </td>
+            </tr>
+            <tr>
+                <th> Prenume</th>
+                <td>@Html.DisplayFor(Model => Model.FirstName) </td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>@Html.DisplayFor(Model => Model.EmailAddress) </td>
+            </tr>
+            <tr>
+                <th>Nume de utilizator</th>
+                <td>@Html.DisplayFor(Model => Model.UserName) </td>
+            </tr>
+        </table>
+        <a asp-action="Edit" asp-controller="Users" asp-route-id="@Html.ViewData.Model.Id" id="EditTeacher">Editeaza profilul</a>
+    </div>
+    <hr />
+    <h2>
+        Alege o clasă
+    </h2>
+<form method="post" asp-controller="Users" asp-action="Choose_class" >
+    <div class="clase">
+    <div>
+        <input type="submit" value="clasa I A" asp-for="clasa" id="clasaIA"/>
+        <h3>Procent de promovabilitate: <strong>@ViewBag.procentClasaIA 20%</strong></h3>
 
-</div>
-
-<form method="post" asp-controller="Users" asp-action="Choose_class">
-    <input type="submit" value="clasa I A" asp-for="clasa"/>
-    <input type="submit" value="clasa I B" asp-for="clasa"/>
-    <input type="submit" value="clasa a II-a A" asp-for="clasa"/>
-    <input type="submit" value="clasa a II-a B" asp-for="clasa"/>
-    <input type="submit" value="clasa a III-a A" asp-for="clasa"/>
-    <input type="submit" value="clasa a III-a B" asp-for="clasa"/>
-    <input type="submit" value="clasa a IV-a A" asp-for="clasa"/>
-    <input type="submit" value="clasa a IV-a B" asp-for="clasa"/>
-    
-  
+    </div>
+    <div>
+        <input type="submit" value="clasa I B" asp-for="clasa" id="clasaIB"/>
+        <h3>Procent de promovabilitate: <strong>@ViewBag.procentClasaIA 20%</strong></h3>
+    </div>
+    <div>
+        <input type="submit" value="clasa a II-a A" asp-for="clasa" id="clasaIIA"/>
+        <h3>Procent de promovabilitate: <strong>@ViewBag.procentClasaIA 20%</strong></h3>
+    </div>
+    <div>
+        <input type="submit" value="clasa a II-a B" asp-for="clasa" id="clasaIIB"/>
+        <h3>Procent de promovabilitate: <strong>@ViewBag.procentClasaIA 20%</strong></h3>
+    </div>
+    </div>
+    <div class="clase">
+    <div>
+        <input type="submit" value="clasa a III-a A" asp-for="clasa" id="clasaIIIA"/>
+        <h3>Procent de promovabilitate: <strong>@ViewBag.procentClasaIA 20%</strong></h3>
+    </div>
+    <div>
+        <input type="submit" value="clasa a III-a B" asp-for="clasa" id="clasaIIIB"/>
+        <h3>Procent de promovabilitate: <strong>@ViewBag.procentClasaIA 20%</strong></h3>
+    </div>
+    <div>
+        <input type="submit" value="clasa a IV-a A" asp-for="clasa" id="clasaIVA"/>
+        <h3>Procent de promovabilitate: <strong>@ViewBag.procentClasaIA 20%</strong></h3>
+    </div>
+    <div>
+        <input type="submit" value="clasa a IV-a B" asp-for="clasa" id="clasaIVB"/>
+        <h3>Procent de promovabilitate: <strong>@ViewBag.procentClasaIA 20%</strong></h3>
+    </div>
+    </div>
 </form>
 
 </body>

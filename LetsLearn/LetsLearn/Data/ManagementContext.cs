@@ -23,7 +23,7 @@ namespace LetsLearn.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Homework> Homeworks { get; set; }
         public DbSet<Grade> Grades { get; set; }
-        public DbSet<User_homework> User_homework { get; set; }
+
 
         //public DbSet<LetsLearn.Models.UserModel> userModel { get; set; }
 
