@@ -1,0 +1,72 @@
+﻿@using Microsoft.AspNetCore.Razor.Language.Extensions
+@model LetsLearn.ViewModels.SendEmailViewModel
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel='stylesheet' type='text/css' href="/css/detail.css" media="all">
+    <link href="https://fonts.googleapis.com/css?family=Fontdiner+Swanky" rel="stylesheet">
+    <title>Detalii despre @Html.DisplayFor(model => model.Student.FirstName)</title>
+</head>
+<body>
+    <div class="pagina">
+        <div class="submeniu">
+
+            <a id="backButton" asp-action="Clasa">🠸</a>
+
+            <h2 id="titlu">Let's Learn <strong>MATH</strong></h2>
+            <div class="butoane">
+                <a asp-action="StudentDetail" asp-route-id="@Html.ViewData.Model.Student.Id">Detalii despre  @Html.DisplayFor(model => model.Student.FirstName)</a>
+                <a asp-action="SeeExercices" asp-route-id="@Html.ViewData.Model.Student.Id">Vezi exercițile rezolvate</a>
+                <a asp-action="SeePoints" asp-route-id="@Html.ViewData.Model.Student.Id">Vezi punctajele</a>
+                <a asp-action="AddGrade" asp-route-id="@Html.ViewData.Model.Student.Id">Adaugă o notă</a>
+                <a asp-action="SendEmail" asp-route-id="@Html.ViewData.Model.Student.Id">Trimite un email</a>
+            </div>
+        </div>
+       
+            <div class="addContainer">
+                <h1>@ViewBag.msg</h1>
+                <form method="post" asp-controller="Class" asp-action="SendEmail" asp-route-id="@Html.ViewData.Model.Student.Id" class="addForm">
+                    <h3 class="emailTitle">Trimite un email <strong>@Html.ViewData.Model.Student.LastName @Html.ViewData.Model.Student.FirstName</strong> </h3>
+                    <div class="container">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="form-group">
+                            <label asp-for="Contact.FromEmailAddress" class="control-label">Email-ul tau</label>
+                            <input asp-for="Contact.FromEmailAddress" class="form-control" value="@ViewBag.email" />
+                        </div>
+                        <span asp-validation-for="Contact.FromEmailAddress" class="text-danger"></span>
+
+                        <div class="form-group">
+                            <label asp-for="Contact.ToEmailAddress" class="control-label">Email-ul studentului</label>
+                            <input asp-for="Contact.ToEmailAddress" class="form-control" value="@Html.ViewData.Model.Student.EmailAddress" />
+                        </div>
+                        <span asp-validation-for="Contact.ToEmailAddress" class="text-danger"></span>
+
+
+                        
+                        <div class="form-group">
+                            <label asp-for="Contact.Subject" class="control-label">Subiect</label>
+                            <input asp-for="Contact.Subject" class="form-control" />
+                        </div>
+                        <span asp-validation-for="Contact.Subject" class="text-danger"></span>
+
+                        <div class="form-group">
+                            <label asp-for="Contact.Continut" class="control-label"></label>
+                            <textarea asp-for="Contact.Continut" class="form-control" id="Continut"></textarea>
+                        </div>
+
+                        <div class="addGradeButon">
+                            <input type="submit" value="Trimite" class="signupbtn" />
+
+                        </div>
+
+                    </div>
+                </form>
+
+        
+        </div>
+
+    </div>
+
+</body>
+</html>

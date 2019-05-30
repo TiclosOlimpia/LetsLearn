@@ -37,19 +37,16 @@ button.accept-policy {
   line-height: inherit;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
-}
+
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    width: 100%;
+    background-color: #F0EBF4;
 }
 .footer {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
   white-space: nowrap;
@@ -59,8 +56,16 @@ body {
 }
 
 header, nav, footer {
-    background-color: bisque;
+    /*background-color: #E7cfc8;*/
+    background-color: #17252A;
+    color: #e6b655;
+    font-size: 120%;
 }
+
+footer{
+    padding-left: 10%;
+}
+
 
 .navbar-link:hover{
     font-weight: bold;

@@ -13,13 +13,14 @@
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
               crossorigin="anonymous"
-              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"/>
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
     </environment>
     <link rel="stylesheet" href="~/css/style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Fontdiner+Swanky" rel="stylesheet">
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">LetsLearn</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -28,14 +29,14 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="LogIn">Autentifica-te</a>
+                        <li class="nav-item nav1">
+                            <a class="nav-link" asp-area="" asp-controller="Account" asp-action="LogIn">Autentifică-te</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Student">Pagina ta</a>
+                        <li class="nav-item nav2">
+                            <a class="nav-link" asp-area="" asp-controller="Users" asp-action="Student">Pagina ta</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Contact">Contacteaza-ne</a>
+                        <li class="nav-item nav3" >
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact">Contactează-ne</a>
                         </li>
                     </ul>
                 </div>
@@ -49,7 +50,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="footer">
         <div class="container">
             &copy; 2019 - LetsLearn - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>

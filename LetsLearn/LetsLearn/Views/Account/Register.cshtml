@@ -4,35 +4,59 @@
 }
 <head>
     <link rel='stylesheet' type='text/css' href="/css/form.css" media="all">
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var read = new FileReader();
+                read.onload = function(e) {
+                    $('#Image1')
+                        .attr('src', e.target.result);
+
+                };
+                read.readAsDataURL(input.files[0]);
+            }
+            
+        }
+    </script>
 </head>
 
 <div id="Register">
     <div class="content">
-        <h1 class="form-title">Register</h1>
+        <h1 class="form-title">Înregistreză-te</h1>
         <form method="post" asp-controller="Account" asp-action="Register" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
+            <img src="/Images/log.png"  id="Image1"/>
+            <div id="ed">
+                <button id="files" onclick="document.getElementById('file').click(); return false;">Alege o fotografie</button>
+                <input asp-for="Image" type="file" id="file" style="visibility: hidden;" onchange="readURL(this);" accept="image/*"/>
+            </div>
+            
             <span asp-validation-for="LastName" class="text-danger"></span>
             <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
+                <input asp-for="LastName" placeholder="Nume" class="form-control"/>
             </div>
-
             <span asp-validation-for="FirstName" class="text-danger"></span>
             <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
+                <input asp-for="FirstName" placeholder="Prenume" class="form-control"/>
             </div>
-
             <span asp-validation-for="EmailAddress" class="text-danger">@ViewBag.EmailAddress</span>
             <div class="form-group">
-                <label asp-for="EmailAddress" class="control-label"></label>
-                <input asp-for="EmailAddress" class="form-control" />
+                <input asp-for="EmailAddress" placeholder="Email" class="form-control"/>
+            </div>
+            <span asp-validation-for="UserName" class="text-danger">@ViewBag.UserName</span>
+            <div class="form-group">
+                <input asp-for="UserName" placeholder="Nume de utilizator" class="form-control"/>
+            </div>
+            <span asp-validation-for="Password" class="text-danger"></span>
+            <div class="form-group">
+                <input asp-for="Password" type="password" placeholder="Parola" class="form-control"/>
+            </div>
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            <div class="form-group">
+                <input asp-for="ConfirmPassword" placeholder="Confirmarea parolei" class="form-control"/>
             </div>
 
-
             <div class="form-group">
-                <label asp-for="Class" class="control-label"></label>
+                <label asp-for="Class"></label>
                 <select asp-for="Class" class="text-control">
                     <option class="form-control" value="-"> - </option>
                     <option class="form-control" value="clasa I A"> clasa I A </option>
@@ -47,38 +71,12 @@
                 <span></span>
             </div>
 
-            <span asp-validation-for="UserName" class="text-danger">@ViewBag.UserName</span>
-            <div class="form-group">
-                <label asp-for="UserName" class="control-label">Nume de utilizator</label>
-                <input asp-for="UserName" class="form-control" />
-            </div>
-
-            <span asp-validation-for="Password" class="text-danger"></span>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" type="password" class="form-control" />
-            </div>
-
-            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-            <div class="form-group">
-                <label asp-for="ConfirmPassword" class="control-label"></label>
-                <input asp-for="ConfirmPassword" class="form-control" />
-            </div>
-            
-            <div class="form-group">
-                <label asp-for="Image"></label>
-                <input asp-for="Image" type="file" value="Alege o fotogratie" title="Alege o fotografie" as/>
-            </div>
-            
-
-            <did class="form-group">
-                <input type="checkbox" asp-for="IsTeacher" /> Sunt Profesor <br />
-            </did>
+            <input type="checkbox" asp-for="IsTeacher"/> Sunt Profesor <br/>
 
 
             <div class="group">
-                <input type="submit" value="Register" class="signupbtn" />
-                <a href="LogIn" class="alternative">LogIn daca ai deja un cont </a>
+                <input type="submit" value="Creare" class="signupbtn"/>
+                <a href="LogIn" class="alternative">Înregistrează-te dacă ai deja un cont </a>
             </div>
         </form>
     </div>

@@ -13,32 +13,32 @@
 <body>
     <div id="LogIn"> 
         <div class="content">
-            <h1 class="form-title">LogIn</h1>
+            
+            <img src="/Images/log.png">
             <form method="post" asp-controller="Account" asp-action="LogIn">
                 <div class="container">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-                    <div class="form-group">
-                        <label asp-for="UserName" class="control-label"></label>
-                        <input asp-for="UserName" class="form-control"/>
-                    </div>
-                        <span asp-validation-for="UserName" class="text-danger"></span>
-
-                    <div class="form-group">
-                        <label asp-for="Password" class="control-label"></label>
-                        <input asp-for="Password" class="form-control"/>
-                    </div>
-                        <span asp-validation-for="Password" class="text-danger"></span>
                     
-                    <did class="form-group">
-                        <input type="checkbox" asp-for="Remember" />Remember me <br/>
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                    <div class="form-group">
+                        <span class="input-group-addon">🔐</span>
+                        <input asp-for="UserName" class="form-control" placeholder="Nume de utilizator" />
+                    </div>
+                       
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                    <div class="form-group">
+                        <span class="input-group-addon">🔑</span>
+                        <input asp-for="Password" placeholder="Parola" class="form-control" />
+                    </div>
+                       
+                    <did class="remember">
+                        <input type="checkbox" asp-for="Remember" class="" />Rămâi logat <br/>
                     </did>
                     <div class="group">
-                        <input type="submit" value="LogIn" class="signupbtn"/>
-                        <a href="Register" class="alternative">sau iti poti creea un cont </a>
+                        <input type="submit" value="Înregistrare" class="signupbtn"/>
+                        <a href="Register" class="alternative">sau îți poți creea un cont </a>
                     </div>
-                    <p><a asp-action="ReadCookie" asp-controller="Account">Read cookie</a></p>
-                    <p>@ViewBag.message</p>
+                    
                 </div>
             </form>
 

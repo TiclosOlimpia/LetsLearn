@@ -30,7 +30,7 @@ namespace LetsLearn.Data
             IsTeacher = isTeacher;
             Clasa = clasa;
             Image = image;
-            Medie = medie;
+            Average = medie;
             //Type = type;
         }
 
@@ -67,7 +67,7 @@ namespace LetsLearn.Data
 
         public string Clasa { get; set; }
 
-        public float Medie { get; set; }
+        public float Average { get; set; }
         //[Required]
         //[StringLength(8, MinimumLength = 6)]
         //public string Type { get; set; }

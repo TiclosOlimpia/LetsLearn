@@ -78,4 +78,12 @@ C:\Users\olimpia\Desktop\LetsLearn-b1d8eda79a77342dacf8b36c530b1c402b442aba\Lets
 C:\Users\olimpia\Desktop\LetsLearn-b1d8eda79a77342dacf8b36c530b1c402b442aba\LetsLearn-b1d8eda79a77342dacf8b36c530b1c402b442aba\LetsLearn\LetsLearn\obj\Debug\netcoreapp2.2\LetsLearn.dll
 C:\Users\olimpia\Desktop\LetsLearn-b1d8eda79a77342dacf8b36c530b1c402b442aba\LetsLearn-b1d8eda79a77342dacf8b36c530b1c402b442aba\LetsLearn\LetsLearn\obj\Debug\netcoreapp2.2\LetsLearn.pdb
 C:\Users\olimpia\Desktop\LetsLearn-b1d8eda79a77342dacf8b36c530b1c402b442aba\LetsLearn-b1d8eda79a77342dacf8b36c530b1c402b442aba\LetsLearn\LetsLearn\obj\Debug\netcoreapp2.2\LetsLearn.csproj.CopyComplete
-C:\Scoala\Licenta\LetsLearn\LetsLearn\LetsLearn\obj\Debug\netcoreapp2.2\Razor\Views\Class\AddHomework.g.cshtml.cs
+C:\Scoala\Licenta\LetsLearn\LetsLearn\LetsLearn\obj\Debug\netcoreapp2.2\Razor\Views\Class\SeePoints.g.cshtml.cs
+C:\Scoala\Licenta\LetsLearn\LetsLearn\LetsLearn\obj\Debug\netcoreapp2.2\Razor\Views\Class\SendEmail.g.cshtml.cs
+C:\Scoala\Licenta\LetsLearn\LetsLearn\LetsLearn\obj\Debug\netcoreapp2.2\Razor\Views\Class\GridExercice.g.cshtml.cs
+C:\Scoala\Licenta\LetsLearn\LetsLearn\LetsLearn\obj\Debug\netcoreapp2.2\Razor\Views\Class\Exercice.g.cshtml.cs
+C:\Scoala\Licenta\LetsLearn\LetsLearn\LetsLearn\obj\Debug\netcoreapp2.2\Razor\Views\Class\Problem.g.cshtml.cs
+C:\Scoala\Licenta\LetsLearn\LetsLearn\LetsLearn\obj\Debug\netcoreapp2.2\Razor\Views\Users\Exercices.g.cshtml.cs
+C:\Scoala\Licenta\LetsLearn\LetsLearn\LetsLearn\obj\Debug\netcoreapp2.2\Razor\Views\Users\Grils.g.cshtml.cs
+C:\Scoala\Licenta\LetsLearn\LetsLearn\LetsLearn\obj\Debug\netcoreapp2.2\Razor\Views\Users\Problems.g.cshtml.cs
+C:\Scoala\Licenta\LetsLearn\LetsLearn\LetsLearn\obj\Debug\netcoreapp2.2\Razor\Views\Users\Homeworks.g.cshtml.cs

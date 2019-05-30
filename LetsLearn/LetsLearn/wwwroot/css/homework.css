@@ -1,0 +1,83 @@
+﻿
+
+
+.form-homework {
+    background-color: #FFC300;
+    border: 1px solid darkred;
+    box-shadow: 10px 10px 7px darkred;
+    display: block;
+    margin-top: 7%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 4%;
+    width: 40%;
+}
+
+h3 {
+    font-weight: bold;
+    font-size: 350%;
+    color: #17252a;
+    text-shadow: 3px 3px 7px darkred;
+}
+
+h3 strong {
+    font-size: 40%;
+    font-weight: initial;
+   
+    
+    text-transform: uppercase;
+    display: block;
+}
+
+
+.form-group {
+    display: flex;
+}
+
+.form-group label {
+    width: 150px;
+    color: darkred;
+    margin-left: 15%;
+    font-size: 120%;
+   
+    text-shadow: 1px 1px 1px #17252a;
+}
+
+.form-group input {
+    background-color: rgba(2,1,1,0);
+    border: none;
+    border-bottom: 1px dashed #17252a;
+    width: 40%;
+    margin-left: 0;
+    color: #17252a;
+}
+
+.form-group textarea {
+    background-color: rgba(2,1,1,0);
+    border: none;
+    border-bottom: 1px dashed #17252a;
+    width: 40%;
+    margin-left: 0;
+    color: #17252a;
+}
+
+.addHomeworkButon {
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    margin: 5%;
+}
+
+
+.addHomeworkButon input {
+    color: white;
+    background-color: black;
+    border: solid 2px darkslategray;
+}
+
+.addHomeworkButon input:hover {
+    color: white;
+    transform: scale(1.2);
+    transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
+}
+

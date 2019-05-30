@@ -24,8 +24,7 @@
             <p>Medie</p>
             <p>Detalii</p>
         </div>
-
-        @foreach (var item in Model)
+        @foreach (var item in Model.OrderBy(model => model.LastName))
         {
             <div class="continut">
                 <p>
@@ -35,13 +34,19 @@
                     @item.Medie
                 </p>
                 <p><a asp-action="StudentDetail" asp-route-id="@item.Id">🔍</a></p>
-             </div>
-         }
-     </div>
+            </div>
+
+
+        }
+        <div class="homeworkButtons">
+            <a asp-action="GridExercice" asp-controller="Class" asp-route-id="@ViewBag.clasa" id="Class">Adaugă grilă </a>
+            <a asp-action="Exercice" asp-controller="Class" asp-route-id="@ViewBag.clasa" id="Class">Adaugă exercițiu</a>
+            <a asp-action="Problem" asp-controller="Class" asp-route-id="@ViewBag.clasa" id="Class">Adaugă problemă</a>
+        </div>
+
+    </div>
   
 </div>
-
-<a asp-action="AddHomework" asp-controller="Class" asp-route-id="@ViewBag.clasa" id="Class">Adauga o tema</a> 
 
 
  

@@ -48,112 +48,16 @@ namespace LetsLearn.Controllers
         [HttpPost]
         public async Task<IActionResult> Contact(ContactModel model)
         {
-            /*
-                var extension = model.EmailAddress.ToString().Split("@")[1];
-                if (extension == "gmail.com")
-                {
-                    var message = new MimeMessage();
-                    message.From.Add(new MailboxAddress(address: model.EmailAddress.ToString()));
-                    message.To.Add(new MailboxAddress(address: "oli.olimpia29@gmail.com"));
-                    message.Subject = model.Subject.ToString();
-                    message.Body = new TextPart()
-                    {
-                        Text = model.Continut.ToString()
-                    };
-                    using (var client = new MailKit.Net.Smtp.SmtpClient())
-                        {
-                            client.Connect("smtp.gmail.com", 587, false);
-                            client.Authenticate(userName: model.EmailAddress.ToString(),
-                                password: model.Password.ToString());
 
-                            try
-                            {
-                            client.Send(message);
-                            client.Disconnect(true);
-                            @ViewBag.msg = "Succes";
-                            }
-                            catch (Exception e)
-                            {
-                                @ViewBag.msg = "Eroare";
-                            }
-
-                        }
-                }
-                else
-                {
-                    EASendMail.SmtpClient client = new EASendMail.SmtpClient();
-                    EASendMail.SmtpMail mail = new EASendMail.SmtpMail("TryIt");
-
-                    mail.From = model.EmailAddress.ToString();
-                    mail.To = "oli.olimpia29@gmail.com";
-                    mail.Subject = model.Subject.ToString();
-                    mail.TextBody = model.Continut.ToString();
-
-                    EASendMail.SmtpServer server = new EASendMail.SmtpServer("smtp.mail.yahoo.com");
-
-                    server.User = model.EmailAddress.ToString();
-                    server.Password = model.Password.ToString();
-                    server.Port = 465;
-                    server.ConnectType = SmtpConnectType.ConnectSSLAuto;
-                    try
-                    {
-                        client.SendMail(server, mail);
-                        @ViewBag.msg = "Success";
-                }
-                    catch (Exception e)
-                    {
-                    @ViewBag.msg = "Eroare";
-                    }
-
-                }
-
-
-        */
-
-
-            var extension = model.EmailAddress.ToString().Split("@")[1];
-
-            try
-            {
-                var message = new MimeMessage();
-                message.From.Add(new MailboxAddress("fromadresa",model.EmailAddress.ToString()));
-                message.To.Add(new MailboxAddress("toadresa","oli.olimpia29@gmail.com"));
-                message.Subject = model.Subject.ToString();
-                message.Body = new TextPart("plain")
-                {
-                    Text = model.Continut.ToString()
-                };
-                using (var client = new MailKit.Net.Smtp.SmtpClient())
-                {
-                    if (extension == "gmail.com")
-                    {
-                        client.Connect("smtp.gmail.com", 587, false);
-                    }
-                    else if (extension=="yahoo.com")
-                    {
-                        client.Connect("smtp.mail.yahoo.com", 465, false);
-                    }
-                    else
-                    {
-                        Exception e = new Exception("email neacceptat");
-                        throw e;
-                    }
-
-                    client.Authenticate(model.EmailAddress.ToString(),model.Password.ToString());
-
-
-                    client.Send(message);
-                    client.Disconnect(true);
-                    @ViewBag.msg = "Succes";
-                }
+            if(MailHelper.Send(model.FromEmailAddress.ToString(), "me", model.Subject.ToString(),
+                model.Continut.ToString()))
+            { 
+                @ViewBag.msg = "Success";
             }
-            catch (Exception e)
+            else
             {
                 @ViewBag.msg = "Eroare";
-            }
-
-   
-            
+            } 
             return View();
         }
 

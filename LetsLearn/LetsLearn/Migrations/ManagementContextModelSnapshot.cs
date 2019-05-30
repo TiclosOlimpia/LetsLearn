@@ -19,6 +19,38 @@ namespace LetsLearn.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("LetsLearn.Data.Exercice", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Clasa")
+                        .IsRequired();
+
+                    b.Property<string>("Container")
+                        .IsRequired()
+                        .HasMaxLength(500);
+
+                    b.Property<string>("CorrectAnswer")
+                        .IsRequired();
+
+                    b.Property<DateTime>("DateEnd");
+
+                    b.Property<DateTime>("DateStart");
+
+                    b.Property<string>("FinallyAnswer")
+                        .IsRequired();
+
+                    b.Property<string>("Title")
+                        .HasMaxLength(50);
+
+                    b.Property<int>("Week");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Exercices");
+                });
+
             modelBuilder.Entity("LetsLearn.Data.Grade", b =>
                 {
                     b.Property<string>("Id")
@@ -26,7 +58,7 @@ namespace LetsLearn.Migrations
 
                     b.Property<DateTime>("Date");
 
-                    b.Property<bool>("Homework");
+                    b.Property<string>("Homework");
 
                     b.Property<string>("StudentId");
 
@@ -39,18 +71,18 @@ namespace LetsLearn.Migrations
                     b.ToTable("Grades");
                 });
 
-            modelBuilder.Entity("LetsLearn.Data.Homework", b =>
+            modelBuilder.Entity("LetsLearn.Data.GridExercice", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Ansear1")
+                    b.Property<string>("Answer1")
                         .IsRequired();
 
-                    b.Property<string>("Ansear2")
+                    b.Property<string>("Answer2")
                         .IsRequired();
 
-                    b.Property<string>("Ansear3")
+                    b.Property<string>("Answer3")
                         .IsRequired();
 
                     b.Property<string>("Clasa")
@@ -58,9 +90,9 @@ namespace LetsLearn.Migrations
 
                     b.Property<string>("Container")
                         .IsRequired()
-                        .HasMaxLength(100);
+                        .HasMaxLength(500);
 
-                    b.Property<string>("CorrectAnsear")
+                    b.Property<string>("CorrectAnswer")
                         .IsRequired();
 
                     b.Property<DateTime>("DateEnd");
@@ -74,13 +106,73 @@ namespace LetsLearn.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Homeworks");
+                    b.ToTable("GridExercices");
+                });
+
+            modelBuilder.Entity("LetsLearn.Data.Problem", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Clasa")
+                        .IsRequired();
+
+                    b.Property<string>("Container")
+                        .IsRequired()
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("CorrectAnswer")
+                        .IsRequired();
+
+                    b.Property<DateTime>("DateEnd");
+
+                    b.Property<DateTime>("DateStart");
+
+                    b.Property<string>("FinallyAnswer")
+                        .IsRequired();
+
+                    b.Property<string>("ProblemData")
+                        .IsRequired()
+                        .HasMaxLength(300);
+
+                    b.Property<string>("Title")
+                        .HasMaxLength(50);
+
+                    b.Property<int>("Week");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Problems");
+                });
+
+            modelBuilder.Entity("LetsLearn.Data.SolvedHomework", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CorrectAnswer")
+                        .IsRequired();
+
+                    b.Property<string>("HomeworkId")
+                        .IsRequired();
+
+                    b.Property<string>("StudentAnswer")
+                        .IsRequired();
+
+                    b.Property<string>("StudentId")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SolvedHomeworks");
                 });
 
             modelBuilder.Entity("LetsLearn.Data.User", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<float>("Average");
 
                     b.Property<string>("Clasa");
 
@@ -100,8 +192,6 @@ namespace LetsLearn.Migrations
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(50);
-
-                    b.Property<float>("Medie");
 
                     b.Property<string>("Password")
                         .IsRequired()

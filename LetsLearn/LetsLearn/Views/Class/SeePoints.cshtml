@@ -1,0 +1,59 @@
+﻿@using Microsoft.AspNetCore.Razor.Language.Extensions
+@model LetsLearn.ViewModels.StudentDetailViewModel
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel='stylesheet' type='text/css' href="/css/detail.css" media="all">
+    <link href="https://fonts.googleapis.com/css?family=Fontdiner+Swanky" rel="stylesheet">
+    <title>Detalii despre @Html.DisplayFor(model => model.student.FirstName)</title>
+    
+</head>
+<body>
+<div class="pagina">
+    <div class="submeniu">
+
+        <a id="backButton" asp-action="Clasa">🠸</a>
+
+        <h2 id="titlu">Let's Learn <strong>MATH</strong></h2>
+        <div class="butoane">
+            <a asp-action="StudentDetail" asp-route-id="@Html.ViewData.Model.student.Id">Detalii despre  @Html.DisplayFor(model => model.student.FirstName)</a>
+            <a asp-action="SeeExercices" asp-route-id="@Html.ViewData.Model.student.Id">Vezi exercițile rezolvate</a>
+            <a asp-action="SeePoints" asp-route-id="@Html.ViewData.Model.student.Id">Vezi punctajele</a>
+            <a asp-action="AddGrade" asp-route-id="@Html.ViewData.Model.student.Id">Adaugă o notă</a>
+            <a asp-action="SendEmail" asp-route-id="@Html.ViewData.Model.student.Id">Trimite un email</a>
+        </div>
+    </div>
+    <div class="note">
+        <div class="seePointsTitle">
+            <h3>Note <strong> @Html.DisplayFor(model => model.student.LastName) @Html.DisplayFor(model => model.student.FirstName)</strong></h3>
+            <img src="@Html.DisplayFor(model=> model.student.Image)" />
+        </div>
+        <hr />
+        <table class="note_detail">
+            <tr>
+                <th class="tablehead">Săptămâna</th>
+                <th class="tablehead">Data</th>
+                <th class="tablehead">Nota</th>
+                <th class="tablehead">Temă?</th>
+            </tr>
+            @foreach (var item in Model.grades)
+            {
+                <tr>
+                    <td class="tabcontent"> @item.Week</td>
+                    <th class="tabcontent">@item.Date</th>
+                    <td class="tabcontent">@item.Value</td>
+                    <td class="tabcontent">@item.Homework</td>
+                </tr>
+            }
+
+        </table>
+
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
+

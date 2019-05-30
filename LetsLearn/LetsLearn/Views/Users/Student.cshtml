@@ -12,71 +12,69 @@
 
 </head>
 <body>
-<h1>Bine ai venit, @ViewBag.student</h1>
-<hr />  
+    <h1>Bine ai venit, @ViewBag.student</h1>
+    <hr />
 
+    <div id="continut" class="continut">
 
-<div id="continut">    
-
-
-    <img src="@Html.DisplayFor(model => model.student.Image)" />
-    <table id="Profile">
-        <tr>
-            <th id="Left">Nume</th>
-            <td id="Right">@Html.DisplayFor(model => model.student.LastName)</td>
-        </tr>
-        <tr>
-            <th id="Left">Prenume</th>
-            <td id="Right">@Html.DisplayFor(model => model.student.FirstName)</td>
-        </tr>
-
-        <tr>
-            <th id="Left">Email</th>
-            <td id="Right"> @Html.DisplayFor(model => model.student.EmailAddress) </td>
-        </tr>
-
-        <tr>
-            <th id="Left"> Nume de utilizator</th>
-            <td id="Right"> @Html.DisplayFor(model => model.student.UserName) </td>
-        </tr>
-
-
-    </table>
-    
- </div>   
-    <a asp-action="Edit" asp-controller="Users" asp-route-id="@Html.ViewData.Model.student.Id" id="Edit">Editeaza profilul</a> 
-<hr/>
-    
-<div>
-
-    
-    <details>
-    <summary>Verifica situatia</summary>
-    <table class="table table-bordered">
-        <tr>
-            <th>Saptamana</th>
-            <th>Data</th>
-            <th>Nota</th>
-            <th>Tema?</th>
-        </tr>
-        @foreach (var item in Model.grades)
-        {
+        <img src="@Html.DisplayFor(model => model.student.Image)" />
+        <table id="Profile">
             <tr>
-                <td> @item.Week</td>
-                <td>@item.Date</td>
-                <td>@item.Value</td>
-                <td>@item.Homework</td>
+                <th id="Left">Nume</th>
+                <td id="Right">@Html.DisplayFor(model => model.student.LastName)</td>
             </tr>
-        }
+            <tr>
+                <th id="Left">Prenume</th>
+                <td id="Right">@Html.DisplayFor(model => model.student.FirstName)</td>
+            </tr>
+            <tr>
+                <th id="Left">Email</th>
+                <td id="Right"> @Html.DisplayFor(model => model.student.EmailAddress) </td>
+            </tr>
+            <tr>
+                <th id="Left"> Nume de utilizator</th>
+                <td id="Right"> @Html.DisplayFor(model => model.student.UserName) </td>
+            </tr>
 
-           
-    </table>
-    </details>
+        </table>
 
+    </div>
+    <a asp-action="Edit" asp-controller="Users" asp-route-id="@Html.ViewData.Model.student.Id" id="Edit">Editează profilul</a>
+    <hr />
 
+    <div class="buttons">
+        
+        <div id ="situation">
+        <details>
+            <summary>Verifică situația</summary>
+            <table class="table table-bordered">
+                <tr>
+                    <th>Săptămâna</th>
+                    <th>Data</th>
+                    <th>Nota</th>
+                    <th>Temă?</th>
+                </tr>
+                @foreach (var item in Model.grades)
+                {
+                    <tr>
+                        <td> @item.Week</td>
+                        <td>@item.Date</td>
+                        <td>@item.Value</td>
+                        <td>@item.Homework</td>
+                    </tr>
+                }
 
-</div>
+            </table>
+        </details>
+        </div>
 
+        <div class="homeworks">
+        <a asp-action="Grils" asp-controller="Users" asp-route-id="@Html.ViewData.Model.student.Id" id="Homeworks">Grile</a>
+        <a asp-action="Exercices" asp-controller="Users" asp-route-id="@Html.ViewData.Model.student.Id" id="Homeworks">Exerciții</a>
+            <a asp-action="Problems" asp-controller="Users" asp-route-id="@Html.ViewData.Model.student.Id" id="Homeworks">Probleme</a>
+         </div>
+
+    </div>
 
 </body>
 </html>

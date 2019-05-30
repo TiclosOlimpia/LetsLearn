@@ -37,6 +37,8 @@ namespace LetsLearn.Models
 
         public string Class { get; set; }
 
+        public string Image { get; set; }
+
         public float Medie { get; set; }
     }
 }

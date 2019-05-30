@@ -547,36 +547,10 @@ pre code {
 }
 
 .container {
-  width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
+    width: 100%;
 }
 
-@media (min-width: 576px) {
-  .container {
-    max-width: 540px;
-  }
-}
 
-@media (min-width: 768px) {
-  .container {
-    max-width: 720px;
-  }
-}
-
-@media (min-width: 992px) {
-  .container {
-    max-width: 960px;
-  }
-}
-
-@media (min-width: 1200px) {
-  .container {
-    max-width: 1140px;
-  }
-}
 
 .container-fluid {
   width: 100%;
@@ -4068,6 +4042,7 @@ input[type="button"].btn-block {
 
 .nav-link:hover, .nav-link:focus {
   text-decoration: none;
+    color: #ffc300;
 }
 
 .nav-link.disabled {
@@ -4146,8 +4121,10 @@ input[type="button"].btn-block {
 }
 
 .navbar {
-  background-color : bisque;
-  position: relative;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
@@ -4156,7 +4133,19 @@ input[type="button"].btn-block {
   align-items: center;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  padding: 0.5rem 1rem;
+}
+
+.nav-item {
+    text-align: center;
+    width: 220px;
+    padding: 0.5rem 1rem;
+    color: #e7cfc8;
+}
+
+.nav-item:hover{
+    
+    font-weight: bold;
+    color: #1725FA;
 }
 
 .navbar > .container,
@@ -4175,7 +4164,6 @@ input[type="button"].btn-block {
   display: inline-block;
   padding-top: 0.3125rem;
   padding-bottom: 0.3125rem;
-  margin-right: 1rem;
   font-size: 1.25rem;
   line-height: inherit;
   white-space: nowrap;
@@ -4199,6 +4187,11 @@ input[type="button"].btn-block {
 .navbar-nav .nav-link {
   padding-right: 0;
   padding-left: 0;
+ 
+}
+
+.nav-link {
+    color: #e6b655;
 }
 
 .navbar-nav .dropdown-menu {
@@ -4228,6 +4221,26 @@ input[type="button"].btn-block {
   background-color: transparent;
   border: 1px solid transparent;
   border-radius: 0.25rem;
+}
+
+.nav1 {
+    /*background-color: #97f2f3;*/
+    background-color: #17252A;
+    color: #e7cfc8;
+    text-shadow: 2px 2px 5px black;
+}
+
+.nav2 {
+    /*background-color: #f1e0b0;*/
+    background-color: #17252A;
+    color: #e7cfc8;
+    text-shadow: 2px 2px 5px black;
+}
+.nav3 {
+    /*background-color: #f1cdb0;*/
+    background-color: #17252A;
+    color: #e7cfc8;
+    text-shadow: 2px 2px 5px black;
 }
 
 .navbar-toggler:hover, .navbar-toggler:focus {
@@ -4457,38 +4470,44 @@ input[type="button"].btn-block {
 }
 
 .navbar-light .navbar-brand {
-  color: rgba(0, 0, 0, 0.9);
-  background-color: bisque;
+    width: 200px;
+    /*background-color: #89AEB2;*/
+    background-color: #17252A;
+    padding: 0.81rem 1rem;
+    font-family: 'Fontdiner Swanky', cursive;
+    font-size: 120%;
+    color: #e6b655;
+    text-shadow: 3px 3px 5px black;
 }
 
 
 
-.navbar-light .navbar-brand:hover, .navbar-light .navbar-brand:focus {
-  color: rgba(0, 0, 0, 0.9);
-    background-color: coral;
-}
+    .navbar-light .navbar-brand:hover, .navbar-light .navbar-brand:focus {
+        font-weight: bold;
+        color: #ffc300;
+    }
 
 .navbar-light .navbar-nav .nav-link {
-  color: rgba(0, 0, 0, 0.5);
+   
 }
 
 .navbar-light .navbar-nav .nav-link:hover, .navbar-light .navbar-nav .nav-link:focus {
-  color: rgba(0, 0, 0, 0.7);
+  
 }
 
 .navbar-light .navbar-nav .nav-link.disabled {
-  color: rgba(0, 0, 0, 0.3);
+  
 }
 
 .navbar-light .navbar-nav .show > .nav-link,
 .navbar-light .navbar-nav .active > .nav-link,
 .navbar-light .navbar-nav .nav-link.show,
 .navbar-light .navbar-nav .nav-link.active {
-  color: rgba(0, 0, 0, 0.9);
+  
 }
 
 .navbar-light .navbar-toggler {
-  color: rgba(0, 0, 0, 0.5);
+
   border-color: rgba(0, 0, 0, 0.1);
 }
 
@@ -4517,15 +4536,15 @@ input[type="button"].btn-block {
 }
 
 .navbar-dark .navbar-nav .nav-link {
-  color: rgba(255, 255, 255, 0.5);
+  
 }
 
 .navbar-dark .navbar-nav .nav-link:hover, .navbar-dark .navbar-nav .nav-link:focus {
-  color: rgba(255, 255, 255, 0.75);
+  
 }
 
 .navbar-dark .navbar-nav .nav-link.disabled {
-  color: rgba(255, 255, 255, 0.25);
+  
 }
 
 .navbar-dark .navbar-nav .show > .nav-link,
@@ -5931,23 +5950,9 @@ a.close.disabled {
   .modal-dialog-centered::before {
     height: calc(100vh - 3.5rem);
   }
-  .modal-sm {
-    max-width: 300px;
-  }
+  
 }
 
-@media (min-width: 992px) {
-  .modal-lg,
-  .modal-xl {
-    max-width: 800px;
-  }
-}
-
-@media (min-width: 1200px) {
-  .modal-xl {
-    max-width: 1140px;
-  }
-}
 
 .tooltip {
   position: absolute;

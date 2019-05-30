@@ -1,0 +1,179 @@
+﻿@using System.Reflection.Metadata
+@using Microsoft.AspNetCore.Razor.Language.Extensions
+@model LetsLearn.ViewModels.StudentGrilsViewModel
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel='stylesheet' type='text/css' href="/css/detail.css" media="all">
+    <link href="https://fonts.googleapis.com/css?family=Fontdiner+Swanky" rel="stylesheet">
+    <title>Detalii despre teme</title>
+</head>
+<body>
+<div class="pagina">
+    <div class="submeniu">
+
+        <a id="backButton" asp-action="Student">🠸</a>
+
+        <h2 id="titlu">Let's Learn <strong>MATH</strong></h2>
+        <div class="butoane">
+            <a asp-action="Grils" asp-controller="Users" asp-route-id="@Html.ViewData.Model.student.Id" id="Homeworks">Grile</a>
+            <a asp-action="Exercices" asp-controller="Users" asp-route-id="@Html.ViewData.Model.student.Id" id="Homeworks">Exerciții</a>
+            <a asp-action="Problems" asp-controller="Users" asp-route-id="@Html.ViewData.Model.student.Id" id="Homeworks">Probleme</a>
+        </div>
+    </div>
+        
+    <div class="note">
+        <div class="seePointsTitle">
+            <h3>Grile <strong> @Html.DisplayFor(model => model.student.LastName) @Html.DisplayFor(model => model.student.FirstName)</strong></h3>
+            <img src="@Html.DisplayFor(model=> model.student.Image)" />
+        </div>
+        <hr />
+
+        <div class="active">
+            <h1 class="active">Grile active</h1>
+            @foreach (var item in Model.homeworks)
+            {
+                <hr class="bord" />
+                <h4> ✪ @item.Title (<strong id="timer" data-date="@item.DateEnd"> </strong>)</h4>
+
+                <h5> @item.Container</h5>
+                <div id="variante" data-id="@item.Id" class="variante">
+                    <label><input type="checkbox">@item.Answer1</label>
+                    <label><input type="checkbox">@item.Answer2</label>
+                    <label><input type="checkbox">@item.Answer3</label>
+                    <label><input type="checkbox">@item.Answer4</label>
+                </div>
+                }
+                </div>
+        <div class="expired">
+            <h1 class="expired">Grile cu termen limită expirat:</h1>
+            @foreach (var item in Model.notAvailableHomewoks.OrderBy(s => s.DateEnd))
+            {
+                <hr class="bord" />
+                <h4> ✪ @item.Title (Data limită: @item.DateEnd)</h4>
+
+                <h5> @item.Container</h5>
+                <ul class="variante">
+                    <li>⮿ @item.Answer1</li>
+                    <li>⮿ @item.Answer2</li>
+                    <li>⮿ @item.Answer3</li>
+                    <li>⮿ @item.Answer4</li>
+                </ul>
+
+
+
+            }
+        </div>
+        <hr />
+        <div class="rezolvate"></div>
+        <h1 class="rezolvate">Teme rezolvate:</h1>
+        @foreach (var item in Model.solvedHomeworks)
+        {
+            <hr class="bord" />
+            <h4> ✪ @item.HomeworkTitle</h4>
+
+            <h5> @item.HomeworkContainer</h5>
+            <ul class="variante">
+                @if (@item.CorrectAnswer.Equals(@item.StudentAnswer))
+                {
+                    <li style="color:#0f0;">Răspunsul tău: @item.CorrectAnswer</li>
+                }
+                else
+                {
+                    <li style="color:#f00;">Răspunsul tău: @item.StudentAnswer</li>
+                    <li style="color: #00ff00">Răspunsul corect: @item.CorrectAnswer</li>
+                }
+            </ul>
+        }
+
+
+
+
+
+    </div>
+
+</div>
+<script>
+    var list = document.querySelectorAll("#timer");
+    for (elem of list) {
+        var dateEnd = elem.dataset.date;
+
+        var countDownDate = new Date(
+            parseInt((dateEnd[6] + dateEnd[7] + dateEnd[8] + dateEnd[9]), 10),
+            parseInt(dateEnd[3] + dateEnd[4], 10) - 1,
+            parseInt(dateEnd[0] + dateEnd[1], 10),
+            parseInt(dateEnd[11] + dateEnd[12], 10),
+            parseInt(dateEnd[14] + dateEnd[15], 10),
+            parseInt(dateEnd[17] + dateEnd[18], 10)).getTime();
+
+
+        var x = setInterval((function (elem) {
+            return function () {
+
+                var now = new Date().getTime();
+                var distance = countDownDate - now;
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                elem.innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+                // If the count down is finished, write some text 
+                if (distance < 0) {
+                    clearInterval(x);
+                    elem.innerHTML = "EXPIRAT";
+                }
+            }
+        })(elem),
+        1000);
+    }
+
+    var variante = document.querySelectorAll("#variante");
+    for (varianta of variante) {
+
+        for (label of varianta.querySelectorAll("label")) {
+            var checkbox = label.querySelector("input");
+            checkbox.addEventListener("click",(
+                function(varianta, label, checkbox) {
+                    return function _listener() {
+                        var raspuns = label.textContent;
+                        var xhttp = new XMLHttpRequest();
+                        xhttp.open("POST", "@Html.DisplayFor(model => model.student.Id)", false)
+                        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                        xhttp.send("studentId=@Html.DisplayFor(model => model.student.Id)&homeworkId=" +
+                            varianta.dataset.id +
+                            "&answer=" +
+                            raspuns);
+
+                        if ("\"" + raspuns + "\"" == xhttp.responseText) {
+                            checkbox.className = "right_checkbox";
+                            checkbox.checked = true;
+                            for (c of varianta.querySelectorAll("input")) {
+                                c.enabled = false;
+                                c.parentNode.replaceChild(c.cloneNode(true), c);
+                            }
+                        } else {
+                            checkbox.className = "wrong_checkbox";
+                            checkbox.checked = true;
+                            for (c of varianta.querySelectorAll("label")) {
+                                var checbox = c.querySelector("input");
+                                if ("\""+c.textContent+"\"" == xhttp.responseText) {
+                                    checbox.className = "right_checkbox";
+                                    checbox.checked = true;
+                                }
+                                checbox.enabled = false;
+                                c.parentNode.replaceChild(c.cloneNode(true), c);
+                            }
+                            
+                        }
+
+                    };
+                })(varianta, label, checkbox));
+        }
+    }
+
+</script>
+
+</body>
+</html>

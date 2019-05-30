@@ -11,6 +11,9 @@
           "lib/net45/EASendMail45.dll": {}
         }
       },
+      "jQuery/3.4.1": {
+        "type": "package"
+      },
       "MailKit/2.1.3": {
         "type": "package",
         "dependencies": {
@@ -2514,6 +2517,12 @@
           "lib/netstandard2.0/Microsoft.IdentityModel.Xml.dll": {}
         }
       },
+      "Microsoft.jQuery.Unobtrusive.Ajax/3.2.6": {
+        "type": "package",
+        "dependencies": {
+          "jQuery": "1.8.0"
+        }
+      },
       "Microsoft.Net.Http.Headers/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -4734,6 +4743,27 @@
         "lib/net45/EASendMail45.dll",
         "lib/uap10.0/EASendMailRT.winmd",
         "tools/install.ps1"
+      ]
+    },
+    "jQuery/3.4.1": {
+      "sha512": "r/cbTa9g145W7vnKHO43YEBPIhURzsA8oRlt/0Zvo9t6MmjgCewfdf8+9w7B1S+gI0UZMwdWzBLG7OvzkVSRIQ==",
+      "type": "package",
+      "path": "jquery/3.4.1",
+      "files": [
+        ".signature.p7s",
+        "Content/Scripts/jquery-3.4.1-vsdoc.js",
+        "Content/Scripts/jquery-3.4.1.js",
+        "Content/Scripts/jquery-3.4.1.min.js",
+        "Content/Scripts/jquery-3.4.1.min.map",
+        "Content/Scripts/jquery-3.4.1.slim.js",
+        "Content/Scripts/jquery-3.4.1.slim.min.js",
+        "Content/Scripts/jquery-3.4.1.slim.min.map",
+        "Tools/common.ps1",
+        "Tools/install.ps1",
+        "Tools/jquery-3.4.1.intellisense.js",
+        "Tools/uninstall.ps1",
+        "jquery.3.4.1.nupkg.sha512",
+        "jquery.nuspec"
       ]
     },
     "MailKit/2.1.3": {
@@ -7128,6 +7158,18 @@
         "lib/netstandard2.0/Microsoft.IdentityModel.Xml.xml",
         "microsoft.identitymodel.xml.5.3.0.nupkg.sha512",
         "microsoft.identitymodel.xml.nuspec"
+      ]
+    },
+    "Microsoft.jQuery.Unobtrusive.Ajax/3.2.6": {
+      "sha512": "oNKDdH3/MnXOtTAye9x7NuZxEKq3jUpY6IEC6QXZdpk2ta7btCtyh4/JlTqe/X6ufUdG2CTuzV/dKOJQDo1nWA==",
+      "type": "package",
+      "path": "microsoft.jquery.unobtrusive.ajax/3.2.6",
+      "files": [
+        ".signature.p7s",
+        "Content/Scripts/jquery.unobtrusive-ajax.js",
+        "Content/Scripts/jquery.unobtrusive-ajax.min.js",
+        "microsoft.jquery.unobtrusive.ajax.3.2.6.nupkg.sha512",
+        "microsoft.jquery.unobtrusive.ajax.nuspec"
       ]
     },
     "Microsoft.Net.Http.Headers/2.2.0": {
@@ -12859,7 +12901,9 @@
       "MailKit >= 2.1.3",
       "Microsoft.AspNetCore.App >= 2.2.0",
       "Microsoft.AspNetCore.Razor.Design >= 2.2.0",
-      "Microsoft.NETCore.App >= 2.2.0"
+      "Microsoft.NETCore.App >= 2.2.0",
+      "Microsoft.jQuery.Unobtrusive.Ajax >= 3.2.6",
+      "jQuery >= 3.4.1"
     ]
   },
   "packageFolders": {
@@ -12927,6 +12971,14 @@
             "target": "Package",
             "version": "[2.2.0, )",
             "autoReferenced": true
+          },
+          "Microsoft.jQuery.Unobtrusive.Ajax": {
+            "target": "Package",
+            "version": "[3.2.6, )"
+          },
+          "jQuery": {
+            "target": "Package",
+            "version": "[3.4.1, )"
           }
         },
         "imports": [

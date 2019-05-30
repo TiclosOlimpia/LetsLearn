@@ -10,11 +10,11 @@ namespace LetsLearn.Models
     {
         [Required]
         [StringLength(60, MinimumLength = 5)]
-        public string EmailAddress { get; set; }
+        public string FromEmailAddress { get; set; }
 
-        [Required]
         [StringLength(60, MinimumLength = 5)]
-        public string Password { get; set; }
+        public string ToEmailAddress { get; set; }
+
 
         [Required]
         [StringLength(60, MinimumLength = 5)]

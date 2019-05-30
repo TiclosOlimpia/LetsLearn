@@ -21,9 +21,11 @@ namespace LetsLearn.Data
 
 
         public DbSet<User> Users { get; set; }
-        public DbSet<Homework> Homeworks { get; set; }
+        public DbSet<GridExercice> GridExercices { get; set; }
+        public DbSet<Exercice> Exercices { get; set; }
+        public DbSet<Problem> Problems { get; set; }
         public DbSet<Grade> Grades { get; set; }
-
+        public DbSet<SolvedHomework> SolvedHomeworks { get; set; }
 
         //public DbSet<LetsLearn.Models.UserModel> userModel { get; set; }
 

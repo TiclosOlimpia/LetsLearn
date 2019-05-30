@@ -6,13 +6,14 @@ using System.Net.Mail;
 using System.Threading.Tasks;
 using System.IO;
 using System.Text;
+using Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;
 using Microsoft.Extensions.Configuration;
 
 namespace LetsLearn.Helpers
 {
     public class MailHelper
     {
-        public static bool Send(string from, string pass, string subject, string content)
+        public static bool Send(string from, string to, string subject, string content)
         {
             try
             {
@@ -23,18 +24,35 @@ namespace LetsLearn.Helpers
                 var configuration = buiulder.Build();
                 var host = configuration["Gmail:Host"];
                 var port = int.Parse(configuration["Gmail:Port"]);
-                var to = configuration["Gmail:UserName"];
-               
+                var servfrom = configuration["Gmail:UserName"];
+                var pass = configuration["Gmail:Password"];
+
                 var enable = bool.Parse(configuration["Gmail:SMTP:starttls:enable"]);
                 var smtpClient = new SmtpClient(host, port);
 
                 smtpClient.EnableSsl = enable;
-                smtpClient.Credentials = new NetworkCredential(from, pass);
+                smtpClient.Credentials = new NetworkCredential(servfrom, pass);
 
-                MailMessage message = new MailMessage(from, to, subject, content);
-                message.IsBodyHtml = true;
+                content = "From: " + from + "\n" + content;
 
-                smtpClient.Send(message);
+                if (to == "me")
+                {
+                    var servTo = configuration["Gmail:UserName"];
+                    MailMessage message = new MailMessage(servfrom, servTo.ToString(), subject, content);
+                    message.IsBodyHtml = true;
+                    smtpClient.Send(message);
+                }
+                else
+                {
+                     MailMessage message = new MailMessage(servfrom, to, subject, content);
+                     message.IsBodyHtml = true;
+                     smtpClient.Send(message);
+                }
+
+               
+                
+     
+
                 return true;
             }
             catch(Exception ex)
@@ -42,5 +60,6 @@ namespace LetsLearn.Helpers
                 return false;
             }
         }
+       
     }
 }

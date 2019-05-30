@@ -1,41 +1,65 @@
-﻿@using Microsoft.AspNetCore.Razor.Language.Extensions
-@model GradeModel
+﻿@using System.Linq
+@using Microsoft.AspNetCore.Razor.Language.Extensions
+@model LetsLearn.ViewModels.AddGradesViewModel
+<!DOCTYPE html>
+<head>
+    <link rel='stylesheet' type='text/css' href="/css/detail.css" media="all">
+    <link href="https://fonts.googleapis.com/css?family=Fontdiner+Swanky" rel="stylesheet">
+    <title>Detalii despre @Html.DisplayFor(model => model.student.FirstName)</title>
+</head>
+<body>
+<div class="pagina">
+    <div class="submeniu">
 
-<h2>Adauga o nota</h2>
-<h3>@ViewBag.StudId</h3>
+        <a id="backButton" asp-action="Clasa">🠸</a>
 
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <h3></h3>
-        <form asp-action="AddGrade" asp-route-id ="@ViewBag.StudId">
+        <h2 id="titlu">Let's Learn <strong>MATH</strong></h2>
+        <div class="butoane">
+            <a asp-action="StudentDetail" asp-route-id="@Html.ViewData.Model.student.Id">Detalii despre  @Html.DisplayFor(model => model.student.FirstName)</a>
+            <a asp-action="SeeExercices" asp-route-id="@Html.ViewData.Model.student.Id">Vezi exercițile rezolvate</a>
+            <a asp-action="SeePoints" asp-route-id="@Html.ViewData.Model.student.Id">Vezi punctajele</a>
+            <a asp-action="AddGrade" asp-route-id="@Html.ViewData.Model.student.Id">Adaugă o notă</a>
+            <a asp-action="SendEmail" asp-route-id="@Html.ViewData.Model.student.Id">Trimite un email</a>
+        </div>
+    </div>
+    <div class="addContainer">
+        
+        <form class="addForm" asp-action="AddGrade" asp-route-id="@ViewBag.StudId">
+
+            <h3>Adaugă o notă <strong>@Html.ViewData.Model.student.LastName @Html.ViewData.Model.student.FirstName</strong> </h3>
+
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <span asp-validation-for="grade.Week" class="text-danger"></span>
             <div class="form-group">
-                <label asp-for="Week" class="control-label"></label>
-                <input asp-for="Week" class="form-control" />
-                <span asp-validation-for="Week" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Date" class="control-label"></label>
-                <input asp-for="Date" class="form-control" />
-                <span asp-validation-for="Date" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Value" class="control-label"></label>
-                <input asp-for="Value" class="form-control" asp/>
-                <span asp-validation-for="Value" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Homework" class="control-label"></label>
-                <input asp-for="Homework" class="form-control" />
-                <span asp-validation-for="Homework" class="text-danger"></span>
-            </div>
+                <label asp-for="grade.Week" class="control-label"></label>
+                <input asp-for="grade.Week" class="form-control" />
 
+            </div>
+            
             <div class="form-group">
-                <input type="submit" value="AddGrade" onclick="Class/@ViewBag.Id" class="btn btn-default" />
+                <label asp-for="grade.Date" class="control-label"></label>
+                <input asp-for="grade.Date" class="form-control" asp-format="{0:dd/MM/yyyy}" />
+
+            </div> 
+            <span asp-validation-for="grade.Value" class="text-danger"></span>
+            <div class="form-group">
+                <label asp-for="grade.Value" class="control-label"></label>
+                <input asp-for="grade.Value" class="form-control" asp />
+
+            </div>
+            <span asp-validation-for="grade.Homework" class="text-danger"></span>
+            <div class="form-group">
+                <label asp-for="grade.Homework" class="control-label"></label>
+                <input asp-for="grade.Homework" type="checkbox" class="form-control right_checkbox" />
+               
+            </div>
+            <div class="addGradeButon">
+                
+                <input type="submit" value="Adaugă nota" onclick="Class / @ViewBag.StudId"/>
             </div>
         </form>
         
     </div>
 </div>
+</body>
 
