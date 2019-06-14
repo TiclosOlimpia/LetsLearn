@@ -17,6 +17,12 @@ body{
 
 }
 
+.cadran{
+    background-color: rgba(0,0,0,0.6);
+    border-radius: 50px;
+    padding:5%;
+}
+
 #Contact
 {
     margin-top: 9%;
@@ -63,17 +69,19 @@ label
 
 }
 .signupbtn {
-    width: auto;
-    height: 30px;
+    width: 120px;
+    height: 40px;
+    margin-top:5%;
     margin-left: auto;
     margin-right: 0;
     font-weight: bold;
+    font-size: 120%;
     padding-left: 5%;
     padding-right: 5%;
-    background-color: #17252a;
+    background-color: darkred;
     color: #fff300;
     border: 1px solid white;
-
+    border-radius: 50px;
 }
 
 .signupbtn:hover{

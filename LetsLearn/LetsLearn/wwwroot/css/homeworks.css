@@ -1,0 +1,104 @@
+﻿
+body{
+    background-color:white;
+}
+
+.pagina{
+    margin: 7%;
+}
+
+#title {
+    text-align: center;
+    color: #17252A;
+    font-size: 350%;
+    text-shadow: 2px 2px 2px #ffc300;
+}
+
+.student{
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    margin-top: 5%;
+}
+.seePointsTitle{
+
+    color: darkred;
+}
+
+.exercice{
+    margin-bottom: 5%;
+}
+
+.homeworkTitle {
+    text-align: center;
+    margin-bottom: 5%;
+    
+}
+
+.homeworkContainer{
+    text-indent: 60px;
+}
+
+.notare{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+form {
+    display: flex;
+    justify-content: space-between;
+    vertical-align: middle;
+}
+form p{
+    font-weight: bold;
+
+    margin-top: 5px;
+    display: flex;
+    vertical-align: middle;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.butonAdaugaSubmit {
+    background-color: #ffc300;
+    margin-left: 6px;
+    color: #17252a;
+    border-radius: 50px;
+    width: 100px;
+    font-weight: bold;
+    
+}
+
+.butonAdaugaSubmit:hover{
+    background-color: #17252a;
+    color: #ffc300;
+}
+
+select{
+    background-color: #17252a;
+    color: #ffc300;
+}
+
+option {
+        background-color: #17252a;
+        color:#ffc300;
+    }
+
+option:hover {
+    background-color: #ffc300;
+    color: #17252a;
+}
+
+.variante{
+    font-weight: bold;
+}
+
+.adauga{
+    width: 300px;
+}
+
+.variante{
+    width: 550px;
+}

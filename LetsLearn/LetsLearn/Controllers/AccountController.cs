@@ -75,6 +75,13 @@ namespace LetsLearn.Controllers
                         return View();
                     }
                 }
+                if (Helpers.MailHelper.Send("LearningMath", model.EmailAddress, "Creare cont",
+                        "Contul tău a fost creat cu succes! Mulțumim pentru colaborare!") == false)
+                {
+                    ok = true;
+                    @ViewBag.EmailAddress = "Adresa de email este invalida";
+                    return View();
+                }
 
                 if (ok == false)
                 {
@@ -155,6 +162,14 @@ namespace LetsLearn.Controllers
 
         }
 
+        [HttpGet]
+        public IActionResult LogOut()
+        {
+            Response.Cookies.Delete("Id");
+            return RedirectToAction("LogIn");
+
+
+        }
        
 
         [HttpPost]

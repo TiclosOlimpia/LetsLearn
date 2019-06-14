@@ -12,7 +12,7 @@ namespace LetsLearn.Data
 
         }
 
-        public Grade(int value, DateTime date, int week, string homework, string studentId)
+        public Grade(int value, DateTime date, int week, string homework, string studentId, string teacherId)
         {
             Id = Guid.NewGuid().ToString();
             //Guard.ValueNotNull(value, nameof(value));
@@ -22,6 +22,7 @@ namespace LetsLearn.Data
             Week = week;
             Homework = homework;
             StudentId = studentId;
+            TeacherId = teacherId;
 
         }
 
@@ -39,6 +40,9 @@ namespace LetsLearn.Data
         public string Homework { get; set; }
 
         public string StudentId { get; set; }
+
+        [Required]
+        public string TeacherId { get; set; }
         //[ForeignKey("Exam")]
         //public Guid ExamId { get; private set; }
 

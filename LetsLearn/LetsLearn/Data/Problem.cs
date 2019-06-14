@@ -16,7 +16,7 @@ namespace LetsLearn.Data
 
         }
 
-        public Problem(string title, string container,string problemData, string correctAnswer, string finallyAnswer, int week, DateTime dateStart, DateTime dateEnd, string clasa)
+        public Problem(string title, string container,string problemData, string correctAnswer, string finallyAnswer, int week, DateTime dateStart, DateTime dateEnd, string clasa, string teacherId)
         {
             Id = Guid.NewGuid().ToString();
             //Guard.ArgumentNotNullOrEmpty(title, nameof(title));
@@ -32,6 +32,7 @@ namespace LetsLearn.Data
             DateEnd = dateEnd;
             Week = week;
             Clasa = clasa;
+            TeacherId = teacherId;
         }
 
         [StringLength(50, MinimumLength = 5)]
@@ -64,8 +65,9 @@ namespace LetsLearn.Data
         [Required]
         public string Clasa { get; set; }
 
+        [Required]
+        public string TeacherId { get; set; }
 
-      
         //public ICollection<Grade> Grades { get; private set; }
 
         //[ForeignKey("Student")]

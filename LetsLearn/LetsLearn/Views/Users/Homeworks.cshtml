@@ -1,134 +1,89 @@
 ﻿@using System.Reflection.Metadata
 @using Microsoft.AspNetCore.Razor.Language.Extensions
-@model LetsLearn.ViewModels.StudentProblemsViewModel
+@model LetsLearn.ViewModels.StudentHomeworksViewModel
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel='stylesheet' type='text/css' href="/css/detail.css" media="all">
+    <link rel='stylesheet' type='text/css' href="/css/homeworks.css" media="all">
     <link href="https://fonts.googleapis.com/css?family=Fontdiner+Swanky" rel="stylesheet">
     <title>Detalii despre teme</title>
 </head>
 <body>
-    <div class="pagina">
-        
-
-        <div class="note">
-
-            <div class="seePointsTitle">
-                <h3>Probleme <strong> @Html.DisplayFor(model => model.student.LastName) @Html.DisplayFor(model => model.student.FirstName)</strong></h3>
-                <img src="@Html.DisplayFor(model => model.student.Image)"/>
-            </div>
-            <hr/>
-
-            <div class="active">
-                <h1 class="active">Probleme active</h1>
-                @foreach (var item in Model.homeworks)
-                {
-                    <form method="post" asp-controller="Users" asp-action="Problems" asp-route-id="@item.Id">
-                        <hr class="bord"/>
-                        <h4> ✪ @item.Title (<strong id="timer" data-date="@item.DateEnd"> </strong>)</h4>
-
-                        <h5> @item.Container</h5>
-                        <span asp-validation-for="SolvedProblemModel.ProblemData" class="text-danger"></span>
-                        <br/>
-                        <textarea asp-for="@Model.SolvedProblemModel.ProblemData" class="text_area_1" placeholder="Datele problemei"></textarea>
-                        <br/>
-                        <span asp-validation-for="SolvedProblemModel.Answer" class="text-danger"></span>
-                        <br/>
-                        <textarea asp-for="@Model.SolvedProblemModel.Answer" class="text_area_1" placeholder="Rezolvarea ta"></textarea>
-                        <br/>
-                        <span asp-validation-for="SolvedProblemModel.Finally" class="text-danger"></span>
-                        <br/>
-                        <textarea asp-for="@Model.SolvedProblemModel.Finally" placeholder="Răspuns final"></textarea>
-
-                        <input type="submit" value="Trimite" id="SendButton"/>
-                    </form>
-
-                }
-            </div>
-            <div class="expired">
-                <h1 class="expired">Probleme cu termen limită expirat:</h1>
-                @foreach (var item in Model.notAvailableHomewoks.OrderBy(s => s.DateEnd))
-                {
-                    <hr class="bord"/>
-                    <h4> ✪ @item.Title (Data limită: @item.DateEnd)</h4>
-
-                    <h5> @item.Container</h5>
-
-
-
-
-
-                }
-            </div>
-            <hr/>
-            <div class="rezolvate"></div>
-            <h1 class="rezolvate">Probleme rezolvate:</h1>
-            @foreach (var item in Model.solvedHomeworks)
+<div class="pagina">
+    <h1 id="title">Teme rezolvate</h1>
+            @foreach (var item in Model.students)
             {
-                <hr class="bord"/>
-                <h4> ✪ @item.HomeworkTitle</h4>
+                <div class="student">
+                <div class="seePointsTitle">
+                    <h3>
+                        <strong> @item.FirstName @item.LastName </strong>
+                    </h3>
+                </div>
+                <hr/>
 
-                <h5> @item.HomeworkContainer</h5>
-                <ul class="variante">
-                    @if (@item.CorrectAnswer.Equals(@item.StudentAnswer))
-                    {
-                        <li style="color:#0f0;">Răspunsul tău: @item.CorrectAnswer</li>
-                    }
-                    else
-                    {
-                        <li style="color:#f00;">Răspunsul tău: @item.StudentAnswer</li>
-                        <li style="color: #00ff00">Răspunsul corect: @item.CorrectAnswer</li>
-                    }
-                </ul>
-            }
+                @foreach (var homework in @item.homeworks)
+                {
+                    <div class="exercice"> 
+                    <h4 class="homeworkTitle">✪ @homework.HomeworkTitle </h4>
+                        <h5 class="homeworkContainer"> @homework.HomeworkContainer</h5>
+                        <div class="notare">
+                            <ul class="variante">
 
+                                <li style="color:#f00;">Răspunsul studentului: @homework.StudentAnswer</li>
+                                <li style="color: #00ff00">Răspunsul corect: @homework.CorrectAnswer</li>
 
-
-
-
-        </div>
-
-    </div>
-    <script>
-    var list = document.querySelectorAll("#timer");
-    for (elem of list) {
-        var dateEnd = elem.dataset.date;
-
-        var countDownDate = new Date(
-            parseInt((dateEnd[6] + dateEnd[7] + dateEnd[8] + dateEnd[9]), 10),
-            parseInt(dateEnd[3] + dateEnd[4], 10) - 1,
-            parseInt(dateEnd[0] + dateEnd[1], 10),
-            parseInt(dateEnd[11] + dateEnd[12], 10),
-            parseInt(dateEnd[14] + dateEnd[15], 10),
-            parseInt(dateEnd[17] + dateEnd[18], 10)).getTime();
-
-
-        var x = setInterval((function (elem) {
-            return function () {
-
-                var now = new Date().getTime();
-                var distance = countDownDate - now;
-                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                elem.innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
-
-                // If the count down is finished, write some text
-                if (distance < 0) {
-                    clearInterval(x);
-                    elem.innerHTML = "EXPIRAT";
+                            </ul>
+                            <div class="adauga">
+                                <form>
+                                    <p>Adaugă o notă</p>
+                                    <select>
+                                        <option></option>
+                                        @for (var i = 1; i < 11; i++)
+                                        {
+                                            <option>@i</option>
+                                        }
+                                    </select>
+                                    <button class="butonAdaugaSubmit" type="submit" data-clasa="@item.clasa" data-idstudent="@item.Id" data-idhomework="@homework.Id" data-week="@homework.Week">Adaugă</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 }
+                </div>
             }
-        })(elem),
-        1000);
+
+     
+
+</div>
+
+<script>
+    var butoane = document.querySelectorAll(".butonAdaugaSubmit");
+    for (buton of butoane) {
+
+        buton.addEventListener("click",
+            (function(buton) {
+                return function(e) {
+                    console.log(buton.dataset.idstudent,
+                        buton.dataset.week,
+                        buton.dataset.idhomework);
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.open("POST", buton.dataset.clasa, false)
+                    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    var select = buton.parentElement.querySelector("select");
+                    xhttp.send("studentId=" +
+                        buton.dataset.idstudent +
+                        "&homeworkId=" +
+                        buton.dataset.idhomework +
+                        "&value=" +
+                        select.options[select.selectedIndex].text +
+                        "&week=" +
+                        buton.dataset.week);
+                }
+            })(buton));
+
     }
-
-
-
-    </script>
+</script>
 
 </body>
+
 </html>

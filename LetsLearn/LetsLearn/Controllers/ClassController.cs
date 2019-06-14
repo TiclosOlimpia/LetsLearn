@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using LetsLearn.ViewModels;
 using LetsLearn.Helpers;
+using System;
 
 namespace LetsLearn.Controllers
 {
@@ -167,6 +168,7 @@ namespace LetsLearn.Controllers
         [HttpGet]
         public async Task<IActionResult> AddGrade(string id)
         {
+            
             var user = await _userRepository.GetById<User>(id);
 
             AddGradesViewModel addGrades = new AddGradesViewModel();
@@ -194,16 +196,17 @@ namespace LetsLearn.Controllers
         {
             if (ModelState.IsValid)
             {
+                String teacherId = Request.Cookies["Id"].ToString();
                 if (model.grade.Homework.Equals("true"))
                 {
-                    var grade = new Grade(model.grade.Value, model.grade.Date, model.grade.Week, "🗹", id);
+                    var grade = new Grade(model.grade.Value, model.grade.Date, model.grade.Week, "🗹", id, teacherId);
                     _userRepository.Create<Grade>(grade);
                     _userRepository.Save();
                     return RedirectToAction("StudentDetail", new { id = id });
                 }
                 else
                 {
-                     var grade = new Grade(model.grade.Value, model.grade.Date, model.grade.Week, "⌧", id);
+                     var grade = new Grade(model.grade.Value, model.grade.Date, model.grade.Week, "⌧", id, teacherId);
                     _userRepository.Create<Grade>(grade);
                     _userRepository.Save();
                     return RedirectToAction("StudentDetail", new { id = id });
@@ -247,13 +250,41 @@ namespace LetsLearn.Controllers
         {
             if (ModelState.IsValid)
             {
-                string clasa = Request.Cookies["clasa"].ToString();
-                var homework = new GridExercice(model.Title, model.Container, model.CorrectAnswer , model.Answer1,
-                    model.Answer2, model.Answer3, model.Week, model.DateStart, model.DateEnd, clasa);
-                _userRepository.Create<GridExercice>(homework);
-                _userRepository.Save();
+                if (model.DateEnd < model.DateStart)
+                {
+                    @ViewBag.DateEnd = "Nu poti adauga o tema care expira inainte sa apara";
+                    return View(model);
+                }
+                else
+                {
+                    if (model.DateEnd < DateTime.Now)
+                    {
+                        @ViewBag.DateEnd = "Nu poti adauga o tema expirata";
+                        return View(model);
+                    }
+                    else
+                    {
+                        String teacherId = Request.Cookies["Id"].ToString();
 
-                return RedirectToAction("Clasa", "Class");
+                        string clasa = Request.Cookies["clasa"].ToString();
+                        var homework = new GridExercice(model.Title, model.Container, model.CorrectAnswer,
+                            model.Answer1,
+                            model.Answer2, model.Answer3, model.Week, model.DateStart, model.DateEnd, clasa, teacherId);
+                        _userRepository.Create<GridExercice>(homework);
+                        _userRepository.Save();
+
+                        var users = await _userRepository.Find<User>(s => s.Clasa == clasa);
+                        var teacher = await _userRepository.GetById<User>(teacherId);
+
+                        foreach (var user in users)
+                        {
+                            Helpers.MailHelper.Send(teacher.EmailAddress, user.EmailAddress, "TEMă NOUĂ",
+                                "Ai o grilă nouă de rezolvat. Termenul limită este " + model.DateEnd + ".");
+                        }
+
+                        return RedirectToAction("Clasa", "Class");
+                    }
+                }
             }
 
 
@@ -275,13 +306,40 @@ namespace LetsLearn.Controllers
         {
             if (ModelState.IsValid)
             {
-                string clasa = Request.Cookies["clasa"].ToString();
-                var homework = new Exercice(model.Title, model.Container, model.CorrectAnswer, model.FinallyAnswer,
-                    model.Week, model.DateStart, model.DateEnd, clasa);
-                _userRepository.Create<Exercice>(homework);
-                _userRepository.Save();
+                if (model.DateEnd < model.DateStart)
+                {
+                    @ViewBag.DateEnd = "Nu poti adauga o tema care expira inainte sa apara";
+                    return View(model);
+                }
+                else
+                {
+                    if (model.DateEnd < DateTime.Now)
+                    {
+                        @ViewBag.DateEnd = "Nu poti adauga o tema expirata";
+                        return View(model);
+                    }
+                    else
+                    {
+                        String teacherId = Request.Cookies["Id"].ToString();
+                        string clasa = Request.Cookies["clasa"].ToString();
+                        var homework = new Exercice(model.Title, model.Container, model.CorrectAnswer,
+                            model.FinallyAnswer,
+                            model.Week, model.DateStart, model.DateEnd, clasa, teacherId);
+                        _userRepository.Create<Exercice>(homework);
+                        _userRepository.Save();
 
-                return RedirectToAction("Clasa", "Class");
+                        var users = await _userRepository.Find<User>(s => s.Clasa == clasa);
+                        var teacher = await _userRepository.GetById<User>(teacherId);
+
+                        foreach (var user in users)
+                        {
+                            Helpers.MailHelper.Send(teacher.EmailAddress, user.EmailAddress, "TEMă NOUĂ",
+                                "Ai un exercițiu nouă de rezolvat. Termenul limită este " + model.DateEnd + ".");
+                        }
+
+                        return RedirectToAction("Clasa", "Class");
+                    }
+                }
             }
 
 
@@ -302,15 +360,42 @@ namespace LetsLearn.Controllers
         {
             if (ModelState.IsValid)
             {
-                string clasa = Request.Cookies["clasa"].ToString();
-                var homework = new Problem(model.Title, model.Container,model.ProblemData, model.CorrectAnswer, model.FinallyAnswer,
-                    model.Week, model.DateStart, model.DateEnd, clasa);
-                _userRepository.Create<Problem>(homework);
-                _userRepository.Save();
+                if (model.DateEnd < model.DateStart)
+                {
+                    @ViewBag.DateEnd = "Nu poti adauga o tema care expira inainte sa apara";
+                    return View(model);
+                }
+                else
+                {
+                    if (model.DateEnd < DateTime.Now)
+                    {
+                        @ViewBag.DateEnd = "Nu poti adauga o tema expirata";
+                        return View(model);
+                    }
+                    else
+                    {
 
-                return RedirectToAction("Clasa", "Class");
+                        String teacherId = Request.Cookies["Id"].ToString();
+                        string clasa = Request.Cookies["clasa"].ToString();
+                        var homework = new Problem(model.Title, model.Container, model.ProblemData, model.CorrectAnswer,
+                            model.FinallyAnswer,
+                            model.Week, model.DateStart, model.DateEnd, clasa, teacherId);
+                        _userRepository.Create<Problem>(homework);
+                        _userRepository.Save();
+
+                        var users = await _userRepository.Find<User>(s => s.Clasa == clasa);
+                        var teacher = await _userRepository.GetById<User>(teacherId);
+
+                        foreach (var user in users)
+                        {
+                            Helpers.MailHelper.Send(teacher.EmailAddress, user.EmailAddress, "TEMă NOUĂ",
+                                "Ai o problemă nouă de rezolvat. Termenul limită este " + model.DateEnd + ".");
+                        }
+
+                        return RedirectToAction("Clasa", "Class");
+                    }
+                }
             }
-
 
             return View(model);
         }
@@ -393,6 +478,84 @@ namespace LetsLearn.Controllers
             sendEmail.Contact = null;
 
             return View(sendEmail);
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> SeeExercices(string id)
+        {
+
+            if (ModelState.IsValid)
+            {
+                List<StudentHomeworkModel> teme = new List<StudentHomeworkModel>();
+                var user = await _userRepository.GetById<User>(id);
+                String teacherId = Request.Cookies["Id"].ToString();
+
+                    Task<ICollection<SolvedHomework>> homeworks =
+                        _userRepository.Find<SolvedHomework>(sol => sol.StudentId == id);
+
+                    Collection<SolvedHomeworkModel> solveds = new Collection<SolvedHomeworkModel>();
+
+                    foreach (var homework in homeworks.Result)
+                    {
+                        var solvedHomeworks = await _userRepository.Find<Grade>(g =>
+                            (g.StudentId == homework.StudentId && g.Homework == homework.HomeworkId && g.TeacherId == teacherId));
+
+                        foreach (var grade in solvedHomeworks)
+                        {
+                           
+                        if (await _userRepository.GetById<Problem>(homework.HomeworkId) != null)
+                            {
+                                var myHomework = await _userRepository.GetById<Problem>(homework.HomeworkId);
+                                SolvedHomeworkModel studentHomework = new SolvedHomeworkModel();
+                                studentHomework.HomeworkTitle = myHomework.Title;
+                                studentHomework.CorrectAnswer = myHomework.CorrectAnswer;
+                                studentHomework.HomeworkContainer = myHomework.Container;
+                                studentHomework.StudentAnswer = homework.StudentAnswer;
+                                studentHomework.Id = homework.HomeworkId;
+                                studentHomework.Week = myHomework.Week;
+                                studentHomework.grade = grade.Value;
+                                solveds.Add(studentHomework);
+
+                            }
+                            else
+                            {
+                                var myHomework = await _userRepository.GetById<Exercice>(homework.HomeworkId);
+                                if (myHomework != null)
+                                {
+                                    SolvedHomeworkModel studentHomework = new SolvedHomeworkModel();
+                                    studentHomework.HomeworkTitle = myHomework.Title;
+                                    studentHomework.CorrectAnswer = myHomework.CorrectAnswer;
+                                    studentHomework.HomeworkContainer = myHomework.Container;
+                                    studentHomework.StudentAnswer = homework.StudentAnswer;
+                                    studentHomework.Id = homework.HomeworkId;
+                                    studentHomework.Week = myHomework.Week;
+                                    studentHomework.grade = grade.Value;
+                                    solveds.Add(studentHomework);
+                                }
+                            }
+
+                        }
+
+                    }
+
+                   
+                   StudentHomeworkModel s = new StudentHomeworkModel();
+                    s.FirstName = user.FirstName;
+                    s.LastName = user.LastName;
+                    s.Id = user.Id;
+                    s.UserName = user.UserName;
+                    s.clasa = user.Clasa;
+                    s.homeworks = solveds;
+                    s.homeworks = solveds;
+
+
+                return View(s);
+
+            }
+
+            return NotFound();
+
 
         }
 

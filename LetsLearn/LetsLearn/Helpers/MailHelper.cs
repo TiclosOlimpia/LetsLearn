@@ -33,7 +33,9 @@ namespace LetsLearn.Helpers
                 smtpClient.EnableSsl = enable;
                 smtpClient.Credentials = new NetworkCredential(servfrom, pass);
 
-                content = "From: " + from + "\n" + content;
+                
+                    content = "From: " + from + "\n" + content;
+                
 
                 if (to == "me")
                 {
@@ -49,13 +51,10 @@ namespace LetsLearn.Helpers
                      smtpClient.Send(message);
                 }
 
-               
-                
-     
 
                 return true;
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 return false;
             }

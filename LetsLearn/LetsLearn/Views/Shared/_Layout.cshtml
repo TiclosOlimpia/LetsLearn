@@ -22,7 +22,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">LetsLearn</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">LearningMath</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -35,7 +35,7 @@
                         <li class="nav-item nav2">
                             <a class="nav-link" asp-area="" asp-controller="Users" asp-action="Student">Pagina ta</a>
                         </li>
-                        <li class="nav-item nav3" >
+                        <li class="nav-item nav3">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact">Contactează-ne</a>
                         </li>
                     </ul>
@@ -49,13 +49,11 @@
             @RenderBody()
         </main>
     </div>
-
     <footer class="footer">
         <div class="container">
-            &copy; 2019 - LetsLearn - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2019 - LearningMath <a asp-area="" asp-controller="Home" asp-action="Privacy"></a>
         </div>
     </footer>
-
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
@@ -75,7 +73,31 @@
         </script>
     </environment>
     <script src="~/js/site.js" asp-append-version="true"></script>
+  
+<script>
+    function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for(var i = 0; i <ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
 
-    @RenderSection("Scripts", required: false)
+    var x = document.querySelector(".nav1");
+    if (getCookie("Id") != "") {
+        x.innerHTML = '<a class="nav-link" href="/Account/LogOut">Deconectare</a>';
+    }
+    
+</script>
+@RenderSection("Scripts", required: false)
+
 </body>
 </html>

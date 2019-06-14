@@ -87,3 +87,4 @@ C:\Scoala\Licenta\LetsLearn\LetsLearn\LetsLearn\obj\Debug\netcoreapp2.2\Razor\Vi
 C:\Scoala\Licenta\LetsLearn\LetsLearn\LetsLearn\obj\Debug\netcoreapp2.2\Razor\Views\Users\Grils.g.cshtml.cs
 C:\Scoala\Licenta\LetsLearn\LetsLearn\LetsLearn\obj\Debug\netcoreapp2.2\Razor\Views\Users\Problems.g.cshtml.cs
 C:\Scoala\Licenta\LetsLearn\LetsLearn\LetsLearn\obj\Debug\netcoreapp2.2\Razor\Views\Users\Homeworks.g.cshtml.cs
+C:\Scoala\Licenta\LetsLearn\LetsLearn\LetsLearn\obj\Debug\netcoreapp2.2\Razor\Views\Class\SeeExercices.g.cshtml.cs

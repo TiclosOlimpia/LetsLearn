@@ -86,11 +86,11 @@ namespace LetsLearn.Controllers
                         grademodel.Value = grade.Value;
                         grademodel.Week = grade.Week;
                         grademodel.Date = grade.Date;
-                        if(grade.Homework== "⌧")
+                        if (grade.Homework == "⌧")
                             grademodel.Homework = grade.Homework;
                         else
                         {
-                            if(_userRepository.GetById<GridExercice>(grade.Homework).Result ==null)
+                            if (_userRepository.GetById<GridExercice>(grade.Homework).Result == null)
                             {
                                 if (_userRepository.GetById<Problem>(grade.Homework).Result == null)
                                 {
@@ -118,8 +118,8 @@ namespace LetsLearn.Controllers
                                 grademodel.Homework = homework.Result.Title.ToString();
                             }
                         }
-                            
-                        
+
+
                         models.Add(grademodel);
                     }
 
@@ -241,7 +241,8 @@ namespace LetsLearn.Controllers
 
             List<string> clases = new List<string>
             {
-                "clasa I A", "clasa I B", "clasa a II-a A", "clasa a II-a B", "clasa a III-a A", "clasa a III-a B", "clasa a IV-a A", "clasa a IV-a B"
+                "clasa I A", "clasa I B", "clasa a II-a A", "clasa a II-a B", "clasa a III-a A", "clasa a III-a B",
+                "clasa a IV-a A", "clasa a IV-a B"
             };
 
 
@@ -292,9 +293,9 @@ namespace LetsLearn.Controllers
                     }
                     else
                     {
-                        use.Average = (float)Math.Round(((double) SumaNote / NrNoteActivitate), 4);
+                        use.Average = (float) Math.Round(((double) SumaNote / NrNoteActivitate), 4);
                     }
-                    
+
                     _userRepository.Update<User>(use);
                     _userRepository.Save();
 
@@ -303,10 +304,11 @@ namespace LetsLearn.Controllers
                         Suma++;
                     }
 
-                    var homeworks = _userRepository.Find<SolvedHomework>(s => s.StudentId.ToString() == use.Id.ToString());
+                    var homeworks =
+                        _userRepository.Find<SolvedHomework>(s => s.StudentId.ToString() == use.Id.ToString());
                     foreach (var homework in homeworks.Result)
                     {
-                        grades = _userRepository.Find<Grade>(s => s.StudentId == use.Id);
+                        grades = _userRepository.Find<Grade>(s => s.StudentId == use.Id && s.TeacherId==Id);
                         int ok = 0;
                         foreach (var grade in grades.Result)
                         {
@@ -330,10 +332,10 @@ namespace LetsLearn.Controllers
                 }
                 else
                 {
-                    procent = Math.Round((double)Suma * 100 / users.Result.Count, 2).ToString() + " %";
+                    procent = Math.Round((double) Suma * 100 / users.Result.Count, 2).ToString() + " %";
                 }
 
-               
+
 
 
 
@@ -366,7 +368,7 @@ namespace LetsLearn.Controllers
                 else if (clasa == "clasa a III-a B")
                 {
                     @ViewBag.procentClasaIIIB = procent;
-                    @ViewBag.temeIIIB= NrTemeNecorectate;
+                    @ViewBag.temeIIIB = NrTemeNecorectate;
                 }
                 else if (clasa == "clasa a IV-a A")
                 {
@@ -549,7 +551,8 @@ namespace LetsLearn.Controllers
         [HttpPost()]
 
         public async Task<IActionResult> Grils(string studentId, string homeworkId, string answer)
-            {
+        {
+            @ViewBag.ok = "Apelat";
             User user = await _userRepository.GetById<User>(studentId);
             GridExercice homework = await _userRepository.GetById<GridExercice>(homeworkId);
             SolvedHomework solvedHomework = new SolvedHomework();
@@ -563,6 +566,7 @@ namespace LetsLearn.Controllers
             grade.Date = DateTime.Now;
             grade.StudentId = studentId;
             grade.Week = homework.Week;
+            grade.TeacherId = homework.TeacherId;
 
             if (answer == homework.CorrectAnswer)
             {
@@ -580,137 +584,151 @@ namespace LetsLearn.Controllers
             _userRepository.Create<Grade>(grade);
             _userRepository.Save();
 
-
-         
-                return Json(homework.CorrectAnswer);
             
-            }
-    
+            var teacher = await _userRepository.GetById<User>(homework.TeacherId);
+
+          
+             Helpers.MailHelper.Send(user.EmailAddress, teacher.EmailAddress, "TEMĂ REZOLVATĂ",
+                    user.FirstName+" "+user.LastName+ " a rezolvat "+homework.Title);
+            
 
 
-    [HttpGet]
-    public async Task<IActionResult> Exercices(string id)
-    {
+            return Json(homework.CorrectAnswer);
 
-        User user = await _userRepository.GetById<User>(id);
-
-
-        if (id != user.Id)
-        {
-            return NotFound();
         }
 
-        if (ModelState.IsValid)
+
+
+        [HttpGet]
+        public async Task<IActionResult> Exercices(string id)
         {
 
-            var clasa = user.Clasa.ToString();
-            Task<ICollection<Exercice>> homeworks = _userRepository.Find<Exercice>(s => s.Clasa == clasa);
+            User user = await _userRepository.GetById<User>(id);
 
-            Collection<SolveExerciceModel> availableHomeworks = new Collection<SolveExerciceModel>();
-            Collection<SolveExerciceModel> notAvailableHomeworks = new Collection<SolveExerciceModel>();
-            Collection<SolvedHomeworkModel> solveds = new Collection<SolvedHomeworkModel>();
 
-            foreach (var homework in homeworks.Result)
+            if (id != user.Id)
             {
-                Task<ICollection<SolvedHomework>> solvedHomeworks =
-                    _userRepository.Find<SolvedHomework>(s =>
-                        s.StudentId == user.Id && s.HomeworkId == homework.Id);
+                return NotFound();
+            }
 
+            if (ModelState.IsValid)
+            {
 
+                var clasa = user.Clasa.ToString();
+                Task<ICollection<Exercice>> homeworks = _userRepository.Find<Exercice>(s => s.Clasa == clasa);
 
+                Collection<SolveExerciceModel> availableHomeworks = new Collection<SolveExerciceModel>();
+                Collection<SolveExerciceModel> notAvailableHomeworks = new Collection<SolveExerciceModel>();
+                Collection<SolvedHomeworkModel> solveds = new Collection<SolvedHomeworkModel>();
 
-
-                bool ok = false;
-                foreach (var homeworksm in solvedHomeworks.Result)
+                foreach (var homework in homeworks.Result)
                 {
+                    Task<ICollection<SolvedHomework>> solvedHomeworks =
+                        _userRepository.Find<SolvedHomework>(s =>
+                            s.StudentId == user.Id && s.HomeworkId == homework.Id);
 
-                    SolvedHomeworkModel homeworkm = new SolvedHomeworkModel();
-                    homeworkm.HomeworkTitle = homework.Title;
-                    homeworkm.HomeworkContainer = homework.Container;
-                    homeworkm.CorrectAnswer = homeworksm.CorrectAnswer;
-                    homeworkm.StudentAnswer = homeworksm.StudentAnswer;
-                    solveds.Add(homeworkm);
-                    ok = true;
-                }
 
-                if (ok == false)
-                {
-                    if (homework.DateEnd < DateTime.Now)
-                    {
-                        SolveExerciceModel homeworkm = new SolveExerciceModel();
-                        homeworkm.Title = homework.Title;
-                        homeworkm.Week = homework.Week;
-                        homeworkm.Container = homework.Container;
-                        homeworkm.DateStart = homework.DateStart;
-                        homeworkm.DateEnd = homework.DateEnd;
-                        homeworkm.Id = homework.Id;
-                        homeworkm.Answer = null;
-                        homeworkm.Finally = null;
 
-                        notAvailableHomeworks.Add(homeworkm);
-                    }
-                    else if (homework.DateStart < DateTime.Now)
+
+
+                    bool ok = false;
+                    foreach (var homeworksm in solvedHomeworks.Result)
                     {
 
-                        SolveExerciceModel homeworkm = new SolveExerciceModel();
-                        homeworkm.Title = homework.Title;
-                        homeworkm.Week = homework.Week;
-                        homeworkm.Container = homework.Container;
-                        homeworkm.DateStart = homework.DateStart;
-                        homeworkm.DateEnd = homework.DateEnd;
-                        homeworkm.Id = homework.Id;
-                        homeworkm.Answer = null;
-                       
-                        homeworkm.Finally = null;
-
-                        availableHomeworks.Add(homeworkm);
-
+                        SolvedHomeworkModel homeworkm = new SolvedHomeworkModel();
+                        homeworkm.HomeworkTitle = homework.Title;
+                        homeworkm.HomeworkContainer = homework.Container;
+                        homeworkm.CorrectAnswer = homeworksm.CorrectAnswer;
+                        homeworkm.StudentAnswer = homeworksm.StudentAnswer;
+                        solveds.Add(homeworkm);
+                        ok = true;
                     }
+
+                    if (ok == false)
+                    {
+                        if (homework.DateEnd < DateTime.Now)
+                        {
+                            SolveExerciceModel homeworkm = new SolveExerciceModel();
+                            homeworkm.Title = homework.Title;
+                            homeworkm.Week = homework.Week;
+                            homeworkm.Container = homework.Container;
+                            homeworkm.DateStart = homework.DateStart;
+                            homeworkm.DateEnd = homework.DateEnd;
+                            homeworkm.Id = homework.Id;
+                            homeworkm.Answer = null;
+                            homeworkm.Finally = null;
+
+                            notAvailableHomeworks.Add(homeworkm);
+                        }
+                        else if (homework.DateStart < DateTime.Now)
+                        {
+
+                            SolveExerciceModel homeworkm = new SolveExerciceModel();
+                            homeworkm.Title = homework.Title;
+                            homeworkm.Week = homework.Week;
+                            homeworkm.Container = homework.Container;
+                            homeworkm.DateStart = homework.DateStart;
+                            homeworkm.DateEnd = homework.DateEnd;
+                            homeworkm.Id = homework.Id;
+                            homeworkm.Answer = null;
+
+                            homeworkm.Finally = null;
+
+                            availableHomeworks.Add(homeworkm);
+
+                        }
+                    }
+
+
+
+
                 }
 
+                StudentExercicesViewModel studentGrilsViewModel = new StudentExercicesViewModel();
+                studentGrilsViewModel.homeworks = availableHomeworks;
+                studentGrilsViewModel.notAvailableHomewoks = notAvailableHomeworks;
+                studentGrilsViewModel.solvedHomeworks = solveds;
 
+                TeacherModel student = new TeacherModel();
+                student.LastName = user.LastName.ToString();
+                student.FirstName = user.FirstName.ToString();
+                student.clasa = user.Clasa.ToString();
+                student.Image = user.Image.ToString();
+                student.EmailAddress = user.EmailAddress.ToString();
+                student.Id = user.Id.ToString();
 
+                studentGrilsViewModel.student = student;
+
+                return View(studentGrilsViewModel);
 
             }
 
-            StudentExercicesViewModel studentGrilsViewModel = new StudentExercicesViewModel();
-            studentGrilsViewModel.homeworks = availableHomeworks;
-            studentGrilsViewModel.notAvailableHomewoks = notAvailableHomeworks;
-            studentGrilsViewModel.solvedHomeworks = solveds;
+            return NotFound();
 
-            TeacherModel student = new TeacherModel();
-            student.LastName = user.LastName.ToString();
-            student.FirstName = user.FirstName.ToString();
-            student.clasa = user.Clasa.ToString();
-            student.Image = user.Image.ToString();
-            student.EmailAddress = user.EmailAddress.ToString();
-            student.Id = user.Id.ToString();
-
-            studentGrilsViewModel.student = student;
-
-            return View(studentGrilsViewModel);
 
         }
 
-        return NotFound();
-
-
-    }
-
-    [HttpPost]
-    public async Task<IActionResult> Exercices(StudentExercicesViewModel studentExercicesViewModel, string id)
-    {
-        String userId = Request.Cookies["Id"].ToString();
-        if (ModelState.IsValid)
+        [HttpPost]
+        public async Task<IActionResult> Exercices(StudentExercicesViewModel studentExercicesViewModel, string id)
         {
+            String userId = Request.Cookies["Id"].ToString();
+            if (ModelState.IsValid)
+            {
 
-            Exercice exercice = await _userRepository.GetById<Exercice>(id);
-            var solvedExercice = new SolvedHomework(userId, id, studentExercicesViewModel.SolvedHomework.Answer + "\n Răspuns final: " +
-                                                                                              studentExercicesViewModel.SolvedHomework.Finally, exercice.CorrectAnswer);
-           _userRepository.Create(solvedExercice);
-            _userRepository.Save();
+                Exercice exercice = await _userRepository.GetById<Exercice>(id);
+                var solvedExercice = new SolvedHomework(userId, id,
+                    studentExercicesViewModel.SolvedHomework.Answer + "\n Răspuns final: " +
+                    studentExercicesViewModel.SolvedHomework.Finally, exercice.CorrectAnswer);
+                _userRepository.Create(solvedExercice);
+                _userRepository.Save();
 
-            return RedirectToAction("Exercices", new { id = userId });
+                var teacher = await _userRepository.GetById<User>(exercice.TeacherId);
+                var user = await _userRepository.GetById<User>(userId);
+
+                Helpers.MailHelper.Send(user.EmailAddress, teacher.EmailAddress, "TEMĂ REZOLVATĂ",
+                    user.FirstName + " " + user.LastName + " a rezolvat " + exercice.Title);
+
+                return RedirectToAction("Exercices", new {id = userId});
             }
 
             else
@@ -868,7 +886,7 @@ namespace LetsLearn.Controllers
                             homeworkm.DateStart = homework.DateStart;
                             homeworkm.DateEnd = homework.DateEnd;
                             homeworkm.Id = homework.Id;
-                            homeworkm.ProblemData= null;
+                            homeworkm.ProblemData = null;
                             homeworkm.Answer = null;
                             homeworkm.Finally = null;
 
@@ -897,7 +915,7 @@ namespace LetsLearn.Controllers
 
 
                 }
-            
+
                 StudentProblemsViewModel studentGrilsViewModel = new StudentProblemsViewModel();
                 studentGrilsViewModel.homeworks = availableHomeworks;
                 studentGrilsViewModel.notAvailableHomewoks = notAvailableHomeworks;
@@ -912,6 +930,7 @@ namespace LetsLearn.Controllers
                 student.Id = user.Id.ToString();
 
                 studentGrilsViewModel.student = student;
+
 
                 return View(studentGrilsViewModel);
 
@@ -932,15 +951,23 @@ namespace LetsLearn.Controllers
 
                 Problem exercice = await _userRepository.GetById<Problem>(id);
 
-               
 
 
-                var solvedExercice = new SolvedHomework(userId, id,"Datele problemei:"+studentExercicesViewModel.SolvedProblemModel.ProblemData+"\n Rezolvare:"+ studentExercicesViewModel.SolvedProblemModel.Answer + "\n Răspuns final: " +
-                                                                    studentExercicesViewModel.SolvedProblemModel.Finally, exercice.CorrectAnswer);
+
+                var solvedExercice = new SolvedHomework(userId, id,
+                    "Datele problemei:" + studentExercicesViewModel.SolvedProblemModel.ProblemData + "\n Rezolvare:" +
+                    studentExercicesViewModel.SolvedProblemModel.Answer + "\n Răspuns final: " +
+                    studentExercicesViewModel.SolvedProblemModel.Finally, exercice.CorrectAnswer);
                 _userRepository.Create(solvedExercice);
                 _userRepository.Save();
 
-                return RedirectToAction("Problems", new { id = userId });
+                var teacher = await _userRepository.GetById<User>(exercice.TeacherId);
+                var user = await _userRepository.GetById<User>(userId);
+
+                Helpers.MailHelper.Send(user.EmailAddress, teacher.EmailAddress, "TEMĂ REZOLVATĂ",
+                    user.FirstName + " " + user.LastName + " a rezolvat " + exercice.Title);
+
+                return RedirectToAction("Problems", new {id = userId});
             }
             else
             {
@@ -954,7 +981,7 @@ namespace LetsLearn.Controllers
                 student.LastName = user.Result.LastName;
                 student.UserName = user.Result.UserName;
 
-                
+
 
 
 
@@ -1034,15 +1061,132 @@ namespace LetsLearn.Controllers
                 studentGrilsViewModel.notAvailableHomewoks = notAvailableHomeworks;
                 studentGrilsViewModel.solvedHomeworks = solveds;
 
-                
+
                 studentGrilsViewModel.student = student;
                 studentGrilsViewModel.SolvedProblemModel = studentExercicesViewModel.SolvedProblemModel;
 
                 return View(studentGrilsViewModel);
             }
 
-            
 
+
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> Homeworks(string id)
+        {
+
+            var users = await _userRepository.Find<User>(s => s.Clasa == id);
+
+
+            if (ModelState.IsValid)
+            {
+                List<StudentHomeworkModel> teme = new List<StudentHomeworkModel>();
+
+                foreach (var user in users)
+                {
+                    String teacherId = Request.Cookies["Id"].ToString();
+                    Task<ICollection<SolvedHomework>> homeworks =
+                        _userRepository.Find<SolvedHomework>(s => s.StudentId == user.Id);
+
+                    Collection<SolvedHomeworkModel> solveds = new Collection<SolvedHomeworkModel>();
+
+                    foreach (var homework in homeworks.Result)
+                    {
+                        Task<ICollection<Grade>> solvedHomeworks = _userRepository.Find<Grade>(s =>
+                            (s.StudentId == homework.StudentId && s.Homework == homework.HomeworkId && s.TeacherId==teacherId));
+                        bool ok = false;
+                        foreach (var s in solvedHomeworks.Result)
+                        {
+                            ok = true;
+                        }
+
+
+                        if (ok == false)
+                        {
+                            if (await _userRepository.GetById<Problem>(homework.HomeworkId) != null)
+                            {
+                                var myHomework = await _userRepository.GetById<Problem>(homework.HomeworkId);
+                                SolvedHomeworkModel studentHomework = new SolvedHomeworkModel();
+                                studentHomework.HomeworkTitle = myHomework.Title;
+                                studentHomework.CorrectAnswer = myHomework.CorrectAnswer;
+                                studentHomework.HomeworkContainer = myHomework.Container;
+                                studentHomework.StudentAnswer = homework.StudentAnswer;
+                                studentHomework.Id = homework.HomeworkId;
+                                studentHomework.Week = myHomework.Week;
+                                solveds.Add(studentHomework);
+
+                            }
+                            else
+                            {
+                                var myHomework = await _userRepository.GetById<Exercice>(homework.HomeworkId);
+                                if (myHomework != null)
+                                {
+                                    SolvedHomeworkModel studentHomework = new SolvedHomeworkModel();
+                                    studentHomework.HomeworkTitle = myHomework.Title;
+                                    studentHomework.CorrectAnswer = myHomework.CorrectAnswer;
+                                    studentHomework.HomeworkContainer = myHomework.Container;
+                                    studentHomework.StudentAnswer = homework.StudentAnswer;
+                                    studentHomework.Id = homework.HomeworkId;
+                                    studentHomework.Week = myHomework.Week;
+                                    solveds.Add(studentHomework);
+                                }
+                            }
+
+                        }
+
+                    }
+
+                    if (solveds.Count != 0)
+                    {
+                        StudentHomeworkModel s = new StudentHomeworkModel();
+                        s.FirstName = user.FirstName;
+                        s.LastName = user.LastName;
+                        s.Id = user.Id;
+                        s.UserName = user.UserName;
+                        s.clasa = user.Clasa;
+                        s.homeworks = solveds;
+                        teme.Add(s);
+                    }
+
+
+
+
+
+                }
+
+                var homewor = new StudentHomeworksViewModel();
+                homewor.students = teme;
+
+                return View(homewor);
+
+            }
+
+            return NotFound();
+
+
+        }
+
+        [HttpPost()]
+        public async Task<IActionResult> Homeworks(string studentId, string homeworkId, int value, int week)
+        {
+            String teacherId = Request.Cookies["Id"].ToString();
+            var user = await _userRepository.GetById<User>(studentId);
+
+            var grade = new Grade();
+            grade.Date = DateTime.Now;
+            grade.Homework = homeworkId;
+            grade.StudentId = studentId;
+            grade.Value = value;
+            grade.Week = week;
+            grade.TeacherId = teacherId;
+
+            _userRepository.Create<Grade>(grade);
+            _userRepository.Save();
+
+
+            return RedirectToAction("Homeworks", "Users", user.Clasa);
         }
     }
 }

@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<h1>Bine ati venit, @Html.DisplayFor(Model => Model.FirstName) @Html.DisplayFor(Model => Model.LastName) </h1>
+<h1>Bine ați venit, @Html.DisplayFor(Model => Model.FirstName) @Html.DisplayFor(Model => Model.LastName) </h1>
 <hr/>
 <div class="teacher-data">
     <img src="@Html.DisplayFor(Model => Model.Image)"/>
@@ -40,6 +40,7 @@
 <h2>
     Alege o clasă
 </h2>
+
 <form method="post" asp-controller="Users" asp-action="Choose_class">
     <div class="clase">
         <div>

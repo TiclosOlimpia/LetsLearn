@@ -30,10 +30,11 @@
         <hr />
 
         <div class="active">
+            <h1>@ViewBag.ok</h1>
             <h1 class="active">Grile active</h1>
             @foreach (var item in Model.homeworks)
             {
-                <hr class="bord" />
+                <hr class="bord"/>
                 <h4> ✪ @item.Title (<strong id="timer" data-date="@item.DateEnd"> </strong>)</h4>
 
                 <h5> @item.Container</h5>
@@ -43,8 +44,8 @@
                     <label><input type="checkbox">@item.Answer3</label>
                     <label><input type="checkbox">@item.Answer4</label>
                 </div>
-                }
-                </div>
+            }
+        </div>
         <div class="expired">
             <h1 class="expired">Grile cu termen limită expirat:</h1>
             @foreach (var item in Model.notAvailableHomewoks.OrderBy(s => s.DateEnd))
@@ -141,10 +142,13 @@
                         var xhttp = new XMLHttpRequest();
                         xhttp.open("POST", "@Html.DisplayFor(model => model.student.Id)", false)
                         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                        
                         xhttp.send("studentId=@Html.DisplayFor(model => model.student.Id)&homeworkId=" +
                             varianta.dataset.id +
                             "&answer=" +
                             raspuns);
+
+                        console.log(xhttp.responseText);
 
                         if ("\"" + raspuns + "\"" == xhttp.responseText) {
                             checkbox.className = "right_checkbox";

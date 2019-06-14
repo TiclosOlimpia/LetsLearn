@@ -41,6 +41,9 @@ namespace LetsLearn.Migrations
                     b.Property<string>("FinallyAnswer")
                         .IsRequired();
 
+                    b.Property<string>("TeacherId")
+                        .IsRequired();
+
                     b.Property<string>("Title")
                         .HasMaxLength(50);
 
@@ -61,6 +64,9 @@ namespace LetsLearn.Migrations
                     b.Property<string>("Homework");
 
                     b.Property<string>("StudentId");
+
+                    b.Property<string>("TeacherId")
+                        .IsRequired();
 
                     b.Property<int>("Value");
 
@@ -99,6 +105,9 @@ namespace LetsLearn.Migrations
 
                     b.Property<DateTime>("DateStart");
 
+                    b.Property<string>("TeacherId")
+                        .IsRequired();
+
                     b.Property<string>("Title")
                         .HasMaxLength(50);
 
@@ -134,6 +143,9 @@ namespace LetsLearn.Migrations
                     b.Property<string>("ProblemData")
                         .IsRequired()
                         .HasMaxLength(300);
+
+                    b.Property<string>("TeacherId")
+                        .IsRequired();
 
                     b.Property<string>("Title")
                         .HasMaxLength(50);

@@ -26,7 +26,11 @@ namespace LetsLearn.Models
         [Display(Name = "Răspunsul Tău")]
         public string StudentAnswer { get; set; }
 
-        
+        public string Id { get; set; }
+
+        public int Week { get; set; }
+
+        public float grade { get; set; }
 
     }
 }
